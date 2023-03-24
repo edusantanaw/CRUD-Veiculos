@@ -1,11 +1,17 @@
 import { randomUUID } from "node:crypto";
 
+type data = {
+  cpf: string;
+  password: string;
+  id?: string;
+};
+
 export class User {
   private cpf: string;
   private password: string;
   private id: string;
 
-  constructor(cpf: string, password: string, id?: string) {
+  constructor({cpf, password, id = undefined}: data) {
     this.cpf = cpf;
     this.password = password;
     this.id = id ?? randomUUID();
