@@ -1,65 +1,7 @@
+import { EncrypterSpy } from "../../../test/mocks/helpers/encrypter";
+import { JwtTokenSpy } from "../../../test/mocks/helpers/jwtToken";
 import { UserRepositorySpy } from "../../../test/mocks/repository/user";
-import { User } from "../../domain/entities/user";
-import { IUser } from "../../types/user";
-
-type data = {
-  cpf: string;
-  password: string;
-};
-
-interface ICreateUserRepository {
-  create: (data: IUser) => Promise<IUser>;
-  loadByCpf: (cpf: string) => Promise<IUser | null>;
-}
-
-interface IEncrypter {
-  genHash: (password: string) => Promise<string>;
-}
-interface IJwtToken {
-  genToken: (data: IUser) => string;
-}
-
-class EncrypterSpy implements IEncrypter {
-  public input: any;
-  public async genHash(password: string): Promise<string> {
-    this.input = password;
-    return "hashed_password";
-  }
-}
-
-class JwtTokenSpy {
-  public token?: string;
-  public input: any;
-  public userId?: string;
-  public genToken(data: IUser) {
-    this.userId = data.id;
-    data.id = "any_id";
-    this.input = data;
-    this.token = "token";
-    return this.token;
-  }
-}
-
-class CreateUserUsecase {
-  constructor(
-    private readonly userRepository: ICreateUserRepository,
-    private readonly encrypter: IEncrypter,
-    private readonly jwtToken: IJwtToken
-  ) {}
-
-  public async create(data: data) {
-    const verifyCpfAlredyUsed = !!(await this.userRepository.loadByCpf(
-      data.cpf
-    ));
-    if (verifyCpfAlredyUsed) throw new Error("Cpf já está sendo usado!");
-    const newUser = new User(data);
-    const hasehdPassword = await this.encrypter.genHash(data.password);
-    newUser.setPassword(hasehdPassword);
-    await this.userRepository.create(newUser.getUser());
-    const token = this.jwtToken.genToken(newUser.getUser());
-    return { token, user: newUser };
-  }
-}
+import { CreateUserUsecase } from "./createUser";
 
 function makeSut() {
   const userRepository = new UserRepositorySpy();
