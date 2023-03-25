@@ -19,8 +19,10 @@
   },
   "dependencies": {
     "@prisma/client": "^4.11.0",
+    "@types/express": "^4.17.17",
     "bcrypt": "^5.1.0",
     "cpf-cnpj-validator": "^1.0.3",
+    "express": "^4.18.2",
     "jsonwebtoken": "^9.0.0",
     "zod": "^3.21.4"
   }
