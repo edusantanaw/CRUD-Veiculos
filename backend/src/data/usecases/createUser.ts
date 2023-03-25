@@ -1,7 +1,7 @@
 import { User } from "../../domain/entities/user";
 import { ICreateUsecase } from "../../domain/usecases/createUser";
 import { IUser } from "../../types/user";
-import { IEncrypter } from "../protocols/helpers/encrypter";
+import { IEncoder } from "../protocols/helpers/encrypter";
 import { IJwtToken } from "../protocols/helpers/jwtToken";
 import { ICreateUserRepository } from "../protocols/repository/createUser";
 
@@ -15,7 +15,7 @@ export class CreateUserUsecase
 {
   constructor(
     private readonly userRepository: ICreateUserRepository,
-    private readonly encrypter: IEncrypter,
+    private readonly encrypter: IEncoder,
     private readonly jwtToken: IJwtToken
   ) {}
 
