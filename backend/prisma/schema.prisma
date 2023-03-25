@@ -11,21 +11,27 @@ datasource db {
 }
 
 model User {
-  id       String @id
-  cpf      String @unique
-  password String
+  id        String   @id
+  cpf       String   @unique
+  password  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
+  deleted   Boolean  @default(false)
 
   @@map("user")
 }
 
 model Car {
-  id           String @id
+  id           String   @id
   model        String
-  licensePlate String @unique
+  licensePlate String   @unique
   color        String
   power        String
   brand        String
   renavam      String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @default(now()) @updatedAt
+  deleted      Boolean  @default(false)
 
   @@map("car")
 }

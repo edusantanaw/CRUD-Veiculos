@@ -20,6 +20,7 @@
   "dependencies": {
     "@prisma/client": "^4.11.0",
     "bcrypt": "^5.1.0",
+    "cpf-cnpj-validator": "^1.0.3",
     "jsonwebtoken": "^9.0.0"
   }
 }

@@ -23,6 +23,6 @@ export class CarRepository {
   }
 
   public async delete(id: string) {
-    await car.delete({ where: { id } });
+    await car.update({ where: { id }, data: { deleted: true } });
   }
 }
