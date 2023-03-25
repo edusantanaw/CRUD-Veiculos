@@ -4,8 +4,11 @@
   "main": "index.js",
   "license": "MIT",
   "devDependencies": {
+    "@types/bcrypt": "^5.0.0",
     "@types/jest": "^29.5.0",
+    "@types/jsonwebtoken": "^9.0.1",
     "jest": "^29.5.0",
+    "prisma": "^4.11.0",
     "ts-jest": "^29.0.5",
     "ts-node-dev": "^2.0.0",
     "typescript": "^5.0.2"
@@ -13,5 +16,10 @@
   "scripts": {
     "dev": "ts-node-dev --respawn --transpile-only --clear src/main/serve.ts",
     "test": "jest --passWithNoTests --runInBand --no-cache --watchAll"
+  },
+  "dependencies": {
+    "@prisma/client": "^4.11.0",
+    "bcrypt": "^5.1.0",
+    "jsonwebtoken": "^9.0.0"
   }
 }
