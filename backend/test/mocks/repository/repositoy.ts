@@ -12,7 +12,6 @@ export class RepositorySpy<T extends byId> {
   public async loadById(id: string) {
     this.input = id;
     const item = this.items.filter((i) => i.id === id);
-    if (item.length === 0) return null;
     return item;
   }
 
