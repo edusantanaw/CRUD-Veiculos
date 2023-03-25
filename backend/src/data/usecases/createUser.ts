@@ -1,4 +1,6 @@
 import { User } from "../../domain/entities/user";
+import { ICreateUsecase } from "../../domain/usecases/createUser";
+import { IUser } from "../../types/user";
 import { IEncrypter } from "../protocols/helpers/encrypter";
 import { IJwtToken } from "../protocols/helpers/jwtToken";
 import { ICreateUserRepository } from "../protocols/repository/createUser";
@@ -8,7 +10,9 @@ type data = {
   password: string;
 };
 
-export class CreateUserUsecase {
+export class CreateUserUsecase
+  implements ICreateUsecase<data, { token: string; user: IUser }>
+{
   constructor(
     private readonly userRepository: ICreateUserRepository,
     private readonly encrypter: IEncrypter,
@@ -25,6 +29,6 @@ export class CreateUserUsecase {
     newUser.setPassword(hasehdPassword);
     await this.userRepository.create(newUser.getUser());
     const token = this.jwtToken.genToken(newUser.getUser());
-    return { token, user: newUser };
+    return { token, user: newUser.getUser() };
   }
 }
