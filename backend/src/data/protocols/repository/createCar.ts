@@ -11,6 +11,6 @@ export interface ICreateCarRepository {
     color: string;
     power: string;
     brand: string;
-    renavan: string;
+    renavam: string;
   };
   

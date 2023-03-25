@@ -7,7 +7,7 @@ type data = {
   color: string;
   power: string;
   brand: string;
-  renavan: string;
+  renavam: string;
 };
 
 export class Car {
@@ -17,7 +17,7 @@ export class Car {
   private color: string;
   private power: string;
   private brand: string;
-  private renavan: string;
+  private renavam: string;
 
   constructor(data: data) {
     this.id = data.id ?? randomUUID();
@@ -26,7 +26,7 @@ export class Car {
     this.color = data.color;
     this.power = data.power;
     this.brand = data.brand;
-    this.renavan = data.renavan;
+    this.renavam = data.renavam;
   }
 
   public getCar() {
@@ -37,7 +37,7 @@ export class Car {
       color: this.color,
       power: this.power,
       brand: this.brand,
-      renavan: this.renavan,
+      renavam: this.renavam,
     };
   }
 }

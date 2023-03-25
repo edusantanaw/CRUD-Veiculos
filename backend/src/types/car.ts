@@ -5,5 +5,5 @@ export type ICar = {
     color: string;
     power: string;
     brand: string;
-    renavan: string;
+    renavam: string;
   };
