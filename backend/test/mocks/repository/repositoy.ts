@@ -24,11 +24,11 @@ export class RepositorySpy<T extends byId> {
     return item;
   }
 
-  public async remove(id: string) {
+  public async delete(id: string) {
     this.input = id;
     const itemIndex = this.items.findIndex((item) => (item.id = id));
     if (itemIndex) {
-      this.items.splice(itemIndex, 1);
+      this.items = this.items.splice(itemIndex, 1);
     }
   }
 

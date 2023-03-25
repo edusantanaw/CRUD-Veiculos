@@ -1,30 +1,6 @@
 import { makeCarHelper } from "../../../test/helpers/makeCar";
 import { CarRepositorySpy } from "../../../test/mocks/repository/car";
-import { IUpdateUsecase } from "../../domain/usecases/update";
-import { ICar } from "../../types/car";
-
-interface IUpdateCarRepository {
-  loadById: (id: string) => Promise<ICar | null>;
-  loadByLicensePlate: (licensePlate: string) => Promise<ICar | null>;
-  update: (data: ICar) => Promise<ICar>;
-}
-
-class UpdateCarUsecase implements IUpdateUsecase<ICar, ICar> {
-  constructor(private readonly carRepository: IUpdateCarRepository) {}
-
-  public async update(data: ICar): Promise<ICar> {
-    const car = await this.carRepository.loadById(data.id);
-    if (!car) throw new Error("Carro não encontrado!");
-    if (data.licensePlate !== car.licensePlate) {
-      const verifyIfLicensePlaceAlreadyUser =
-        !!(await this.carRepository.loadByLicensePlate(data.licensePlate));
-      if (verifyIfLicensePlaceAlreadyUser)
-        throw new Error("Está placa ja está cadastrado com outro carro!");
-    }
-    const updatedCar = await this.carRepository.update(data);
-    return updatedCar;
-  }
-}
+import { UpdateCarUsecase } from "./updateCar";
 
 function makeSut() {
   const repository = new CarRepositorySpy();
@@ -69,7 +45,7 @@ describe("UpdateCarUsecase", () => {
     await updateCarUsecase.update(car);
     expect(repository.updateContent).toEqual(car);
   });
- 
+
   test("Should return an updated car if car is updated", async () => {
     const { updateCarUsecase, repository } = makeSut();
     const car = { ...makeCarHelper(), id: "any_id" };
