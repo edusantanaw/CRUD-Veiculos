@@ -1,22 +1,7 @@
 import { makeCarHelper } from "../../../test/helpers/makeCar";
 import { SchemaValidatorSpy } from "../../../test/mocks/helpers/schemaValidator";
-import { Car } from "../../domain/entities/car";
-import { IUpdateUsecase } from "../../domain/usecases/update";
-import { ICar } from "../../types/car";
+import { UpdateCarUsecaseSpy } from "../../../test/mocks/usecases/updateCar";
 import { UpdateCarController, updateParams } from "./update";
-
-class UpdateCarUsecaseSpy implements IUpdateUsecase<updateParams, ICar> {
-  public licensePlateused: boolean = false;
-  public carExists = true;
-  public input: any;
-  public async update(data: updateParams): Promise<ICar> {
-    this.input = data;
-    if (!this.carExists) throw new Error("Não encontrado!");
-    if (this.licensePlateused)
-      throw new Error("Está placa já esta cadastrado a outro carro!");
-    return new Car(data).getCar();
-  }
-}
 
 function makeSut() {
   const schemaValidator = new SchemaValidatorSpy();
@@ -32,7 +17,7 @@ describe("CreateCarController", () => {
   test("Should call schemaValidator with correct values", async () => {
     const { udaptedCarControlelr, schemaValidator } = makeSut();
     await udaptedCarControlelr.handle({ ...makeCarHelper(), id: "any_id" });
-    expect(schemaValidator.input).toEqual({...makeCarHelper(), id: "any_id"});
+    expect(schemaValidator.input).toEqual({ ...makeCarHelper(), id: "any_id" });
   });
 
   test("Should return a badRequest if any field is invalid", async () => {
