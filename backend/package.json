@@ -23,6 +23,7 @@
     "bcrypt": "^5.1.0",
     "cpf-cnpj-validator": "^1.0.3",
     "express": "^4.18.2",
+    "fast-glob": "^3.2.12",
     "jsonwebtoken": "^9.0.0",
     "zod": "^3.21.4"
   }
