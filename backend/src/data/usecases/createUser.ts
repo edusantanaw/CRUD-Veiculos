@@ -1,5 +1,5 @@
 import { User } from "../../domain/entities/user";
-import { ICreateUsecase } from "../../domain/usecases/createUser";
+import { ICreateUsecase } from "../../domain/usecases/create";
 import { IUser } from "../../types/user";
 import { IEncoder } from "../protocols/helpers/encrypter";
 import { IJwtToken } from "../protocols/helpers/jwtToken";

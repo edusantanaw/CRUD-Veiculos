@@ -1,4 +1,4 @@
-import { ICreateUsecase } from "../../domain/usecases/createUser";
+import { ICreateUsecase } from "../../domain/usecases/create";
 import { IUser } from "../../types/user";
 import {
   badRequest,

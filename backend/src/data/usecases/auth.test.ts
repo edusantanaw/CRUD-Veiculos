@@ -9,7 +9,7 @@ function makeSut() {
   const encrypter = new CompareSpy();
   const jwtToken = new JwtTokenSpy();
   const authUsecase = new AuthUsecase(userRepository, encrypter, jwtToken);
-  userRepository.users = [
+  userRepository.items = [
     new User({
       cpf: "any_cpf",
       password: "any_password",
@@ -22,7 +22,7 @@ function makeSut() {
 describe("AuthUsecase", () => {
   test("Should throw if user is not found!", () => {
     const { authUsecase, userRepository } = makeSut();
-    userRepository.users = [];
+    userRepository.items = [];
     const response = authUsecase.execute({
       cpf: "any_cpf",
       password: "any_password",

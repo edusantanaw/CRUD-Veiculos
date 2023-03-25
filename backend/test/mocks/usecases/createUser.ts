@@ -1,5 +1,5 @@
 import { User } from "../../../src/domain/entities/user";
-import { ICreateUsecase } from "../../../src/domain/usecases/createUser";
+import { ICreateUsecase } from "../../../src/domain/usecases/create";
 import { IUser } from "../../../src/types/user";
 
 type data = {

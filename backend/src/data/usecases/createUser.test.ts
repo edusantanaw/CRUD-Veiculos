@@ -18,7 +18,7 @@ function makeSut() {
 describe("CreateUserUsecase", () => {
   test("Should throw if cpf is already being used!", () => {
     const { createUserUsecase, userRepository } = makeSut();
-    userRepository.users = [{ id: "any", cpf: "any_cpf", password: "any" }];
+    userRepository.items = [{ id: "any", cpf: "any_cpf", password: "any" }];
     const response = createUserUsecase.create({
       cpf: "any_cpf",
       password: "any_password",

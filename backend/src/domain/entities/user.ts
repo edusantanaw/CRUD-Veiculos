@@ -11,7 +11,7 @@ export class User {
   private password: string;
   private id: string;
 
-  constructor({cpf, password, id = undefined}: data) {
+  constructor({ cpf, password, id }: data) {
     this.cpf = cpf;
     this.password = password;
     this.id = id ?? randomUUID();
