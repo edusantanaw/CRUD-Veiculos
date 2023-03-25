@@ -1,51 +1,6 @@
 import { CpfValidatorSpy } from "../../../test/mocks/helpers/cpfValidator";
-import { User } from "../../domain/entities/user";
-import {
-  authData,
-  authResponse,
-  IAuthUsecase,
-} from "../../domain/usecases/auth";
-import { IUser } from "../../types/user";
-import { badRequest, error, success } from "../helpers/http-response";
-import { IController } from "../presentational/controller";
-import { IValidator } from "../presentational/helpers/validator";
-
-class AuthUsecaseSpy implements IAuthUsecase {
-  public userExists = true;
-  public isPasswordValid = true;
-  public user: IUser | null = new User({
-    id: "any_id",
-    password: "any_password",
-    cpf: "any_cpf",
-  }).getUser();
-  public input: any;
-  public async execute(data: authData): Promise<authResponse> {
-    this.input = data;
-    if (!this.userExists) throw new Error("Usuario não encontrado!");
-    if (!this.isPasswordValid) throw new Error("A senha é invalida!");
-    return { token: "token", user: this.user! };
-  }
-}
-
-class AuthController implements IController {
-  constructor(
-    private readonly cpfValidator: IValidator<string>,
-    private readonly authUsecase: IAuthUsecase
-  ) {}
-
-  public async handle({ cpf, password }: authData) {
-    try {
-      if (!cpf) return badRequest("O cpf é necessario!");
-      if (!password) return badRequest("A senha é necessaria!");
-      if (!this.cpfValidator.isValid(cpf))
-        return badRequest("O cpf é invalido!");
-      const { token, user } = await this.authUsecase.execute({ cpf, password });
-      return success({ token, user });
-    } catch (err) {
-      return error(err as Error);
-    }
-  }
-}
+import { AuthUsecaseSpy } from "../../../test/mocks/usecases/auth";
+import { AuthController } from "./auth";
 
 function makeSut() {
   const authUsecase = new AuthUsecaseSpy();
@@ -74,7 +29,7 @@ describe("AuthController", () => {
 
   test("Should call cpfValidator with correct value", async () => {
     const { authController, cpfValidator } = makeSut();
-     await authController.handle({
+    await authController.handle({
       cpf: "any_cpf",
       password: "any_password",
     });
@@ -98,7 +53,10 @@ describe("AuthController", () => {
       cpf: "any_cpf",
       password: "any_password",
     });
-    expect(authUsecase.input).toEqual({cpf: "any_cpf", password: "any_password"});
+    expect(authUsecase.input).toEqual({
+      cpf: "any_cpf",
+      password: "any_password",
+    });
   });
 
   test("Should throw if user not exists!", async () => {
@@ -111,7 +69,7 @@ describe("AuthController", () => {
     expect(response.statusCode).toBe(400);
     expect(response.body).toBe("Usuario não encontrado!");
   });
-  
+
   test("Should throw if password is not valid!", async () => {
     const { authController, authUsecase } = makeSut();
     authUsecase.isPasswordValid = false;
@@ -122,7 +80,7 @@ describe("AuthController", () => {
     expect(response.statusCode).toBe(400);
     expect(response.body).toBe("A senha é invalida!");
   });
- 
+
   test("Should return success if everthing is ok", async () => {
     const { authController, authUsecase } = makeSut();
     const response = await authController.handle({
@@ -130,8 +88,6 @@ describe("AuthController", () => {
       password: "any_password",
     });
     expect(response.statusCode).toBe(200);
-    expect(response.body).toEqual({token: "token", user: authUsecase.user});
+    expect(response.body).toEqual({ token: "token", user: authUsecase.user });
   });
-
- 
 });
