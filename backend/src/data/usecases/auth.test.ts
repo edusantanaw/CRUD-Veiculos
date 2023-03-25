@@ -2,38 +2,7 @@ import { CompareSpy } from "../../../test/mocks/helpers/encrypter";
 import { JwtTokenSpy } from "../../../test/mocks/helpers/jwtToken";
 import { UserRepositorySpy } from "../../../test/mocks/repository/user";
 import { User } from "../../domain/entities/user";
-import {
-  authData,
-  authResponse,
-  IAuthUsecase,
-} from "../../domain/usecases/auth";
-import { IUser } from "../../types/user";
-import { IComparePass } from "../protocols/helpers/encrypter";
-import { IJwtToken } from "../protocols/helpers/jwtToken";
-
-interface ILoadByCpf {
-  loadByCpf: (cpf: string) => Promise<IUser | null>;
-}
-
-class AuthUsecase implements IAuthUsecase {
-  constructor(
-    private readonly userRepository: ILoadByCpf,
-    private readonly encrypter: IComparePass,
-    private readonly jwtToken: IJwtToken
-  ) {}
-
-  public async execute(data: authData): Promise<authResponse> {
-    const user = await this.userRepository.loadByCpf(data.cpf);
-    if (!user) throw new Error("Usuario não encontrado!");
-    const isPasswordValid = await this.encrypter.compare(
-      data.password,
-      user.password
-    );
-    if (!isPasswordValid) throw new Error("Senha invalida!");
-    const token = this.jwtToken.genToken(user);
-    return { token, user };
-  }
-}
+import { AuthUsecase } from "./auth";
 
 function makeSut() {
   const userRepository = new UserRepositorySpy();
