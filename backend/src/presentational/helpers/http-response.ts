@@ -24,6 +24,20 @@ function success<T>(data: T): httpResponse {
   };
 }
 
+function server(err: Error) {
+  return {
+    statusCode: 500,
+    body: err.message,
+  };
+}
+
+function noContent<T>(data: any): httpResponse {
+  return {
+    statusCode: 204,
+    body: data,
+  };
+}
+
 function error(data: Error): httpResponse {
   return {
     statusCode: 400,
@@ -31,4 +45,4 @@ function error(data: Error): httpResponse {
   };
 }
 
-export { error, created, badRequest, httpResponse , success};
+export { error, created, badRequest, httpResponse, success, noContent, server };
