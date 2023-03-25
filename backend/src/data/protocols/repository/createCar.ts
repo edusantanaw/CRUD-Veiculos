@@ -9,7 +9,7 @@ export interface ICreateCarRepository {
     model: string;
     licensePlate: string;
     color: string;
-    power: string;
+    power: number;
     brand: string;
     renavam: string;
   };

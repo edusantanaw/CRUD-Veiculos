@@ -4,8 +4,6 @@ import { CreateCarUsecaseSpy } from "../../../test/mocks/usecases/createCar";
 import { carParams } from "../../data/protocols/repository/createCar";
 import { CreateCarController } from "./createCar";
 
-
-
 function makeSut() {
   const schemaValidator = new SchemaValidatorSpy();
   const createCarUsecase = new CreateCarUsecaseSpy();

@@ -5,7 +5,7 @@ type data = {
   model: string;
   licensePlate: string;
   color: string;
-  power: string;
+  power: number;
   brand: string;
   renavam: string;
 };
@@ -15,7 +15,7 @@ export class Car {
   private model: string;
   private licensePlate: string;
   private color: string;
-  private power: string;
+  private power: number;
   private brand: string;
   private renavam: string;
 

@@ -25,4 +25,9 @@ export class CarRepository {
   public async delete(id: string) {
     await car.update({ where: { id }, data: { deleted: true } });
   }
+
+  public async update(data: ICar) {
+    const updatedCar = await car.update({ where: { id: data.id }, data: data });
+    return updatedCar as ICar;
+  }
 }
