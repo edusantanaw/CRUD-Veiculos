@@ -8,7 +8,7 @@ export class CreateCarUsecaseSpy implements ICreateUsecase<carParams, ICar> {
     public input: any;
     public async create(data: carParams): Promise<ICar> {
       this.input = data;
-      const car = new Car({ ...data, id: "any_id" }); // mocking id
+      const car = new Car({ ...data, id: "any_id" }); 
       if (this.licensePlateused)
         throw new Error("Está placa já esta cadastrado a outro carro!");
       return car.getCar();
