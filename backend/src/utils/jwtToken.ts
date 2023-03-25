@@ -8,4 +8,8 @@ export class JwtToken implements IJwtToken {
     const token = jwt.sign(data, this.secret);
     return token;
   }
+
+  public verify(token: string) {
+    jwt.verify(token, this.secret);
+  }
 }
