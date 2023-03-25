@@ -1,7 +1,7 @@
 import { ICar } from "../../../types/car";
 
 export interface ICreateCarRepository {
-    findCarByLicensePlate: (licensePlate: string) => Promise<ICar | null>;
+  loadByLicensePlate: (licensePlate: string) => Promise<ICar | null>;
     create: (data: ICar) => Promise<ICar>;
   }
   

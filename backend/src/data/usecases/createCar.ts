@@ -11,7 +11,7 @@ export class CreateCarUsecase implements ICreateUsecase<carParams, ICar> {
 
   public async create(data: carParams): Promise<ICar> {
     const licensePlateIsUsed =
-      !!(await this.carRepository.findCarByLicensePlate(data.licensePlate));
+      !!(await this.carRepository.loadByLicensePlate(data.licensePlate));
     if (licensePlateIsUsed)
       throw new Error("Está placa já esta cadastrado a outro carro!");
     const newCar = new Car(data);

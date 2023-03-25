@@ -5,6 +5,7 @@ type byId = {
 export class RepositorySpy<T extends byId> {
   public items: T[] = [];
   public input: any;
+  public updateContent: any
   public async loadAll() {
     return this.items;
   }
@@ -31,10 +32,11 @@ export class RepositorySpy<T extends byId> {
     }
   }
 
-  public update(data: T) {
-    this.input = data;
+  public async update(data: T) {
+    this.updateContent = data;
     const byIdData = data as byId;
     const itemIndex = this.items.findIndex((item) => (item.id = byIdData.id));
     this.items[itemIndex] = data;
+    return data;
   }
 }
