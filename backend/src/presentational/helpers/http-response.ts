@@ -9,9 +9,17 @@ function badRequest<T>(data: T): httpResponse {
     body: data,
   };
 }
+
 function created<T>(data: T): httpResponse {
   return {
     statusCode: 201,
+    body: data,
+  };
+}
+
+function success<T>(data: T): httpResponse {
+  return {
+    statusCode: 200,
     body: data,
   };
 }
@@ -23,4 +31,4 @@ function error(data: Error): httpResponse {
   };
 }
 
-export { error, created, badRequest, httpResponse };
+export { error, created, badRequest, httpResponse , success};
