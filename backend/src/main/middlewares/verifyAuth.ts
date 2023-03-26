@@ -8,6 +8,7 @@ function getToken(req: Request) {
   return token;
 }
 const jwtToken = new JwtToken();
+
 export function verifyAuth(req: Request, res: Response, next: NextFunction) {
   try {
     const token = getToken(req);

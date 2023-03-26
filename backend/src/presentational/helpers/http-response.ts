@@ -24,7 +24,7 @@ function success<T>(data: T): httpResponse {
   };
 }
 
-function server(err: Error) {
+function server(err: Error): httpResponse {
   return {
     statusCode: 500,
     body: err.message,

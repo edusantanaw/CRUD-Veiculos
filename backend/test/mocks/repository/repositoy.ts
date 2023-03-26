@@ -5,7 +5,7 @@ type byId = {
 export class RepositorySpy<T extends byId> {
   public items: T[] = [];
   public input: any;
-  public updateContent: any
+  public updateContent: any;
   public async loadAll() {
     return this.items;
   }
@@ -19,14 +19,14 @@ export class RepositorySpy<T extends byId> {
 
   public async create(item: T) {
     this.input = item;
-    item.id = "any_id" // mock id
+    item.id = "any_id"; // mock id
     this.items = [...this.items, item];
     return item;
   }
 
   public async delete(id: string) {
     this.input = id;
-    const itemIndex = this.items.findIndex((item) => (item.id = id));
+    const itemIndex = this.items.findIndex((item) => item.id === id);
     if (itemIndex) {
       this.items = this.items.splice(itemIndex, 1);
     }
@@ -34,8 +34,7 @@ export class RepositorySpy<T extends byId> {
 
   public async update(data: T) {
     this.updateContent = data;
-    const byIdData = data as byId;
-    const itemIndex = this.items.findIndex((item) => (item.id = byIdData.id));
+    const itemIndex = this.items.findIndex((item) => (item.id = data.id));
     this.items[itemIndex] = data;
     return data;
   }
