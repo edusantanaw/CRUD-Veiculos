@@ -28,6 +28,18 @@ describe("UpdateCarUsecase", () => {
     expect(repository.input).toBe("any_id");
   });
 
+  test("Should throw if licensePlace already being used", async () => {
+    const { updateCarUsecase, repository } = makeSut();
+    const car = { ...makeCarHelper(), id: "any_id" };
+    const car2 = { ...makeCarHelper(), id: "id",  };
+    repository.input = "any_id";
+    repository.items = [car, {...car2, licensePlate: "plate"}];
+    const response = updateCarUsecase.update({ ...car, licensePlate: "plate" });
+    expect(response).rejects.toThrow(
+      "Está placa ja está cadastrado com outro carro!"
+    );
+  });
+
   test("Should call repository.loadLicensePlace with correct value", async () => {
     const { updateCarUsecase, repository } = makeSut();
     const { licensePlate, ...rest } = makeCarHelper();
