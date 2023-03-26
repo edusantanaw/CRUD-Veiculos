@@ -7,19 +7,24 @@ import {
   FormControlLabel,
   FormGroup,
 } from "@mui/material";
+import { useAuth } from "../../../hooks/useAuth";
+import { data } from "../../../shared/types/auth";
 
-interface props<T> {
-  service?: (data: T) => Promise<void>;
+interface props {
+  service: (data: data) => Promise<void>;
 }
 
-function Form<T>({}: props<T>) {
+function Form({ service }: props) {
   const cpfRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
+
+  const { error } = useAuth();
+
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    if (cpfRef.current) {
-      console.log(cpfRef.current.value);
-    }
+    const cpf = cpfRef.current!.value;
+    const password = passwordRef.current!.value;
+    await service({ password, cpf });
   }
 
   return (
@@ -56,6 +61,7 @@ function Form<T>({}: props<T>) {
       >
         Enviar
       </Button>
+      {error && <span>{String(error)}</span>}
     </FormContainer>
   );
 }
