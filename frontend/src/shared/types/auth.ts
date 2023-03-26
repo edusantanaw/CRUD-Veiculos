@@ -4,10 +4,17 @@ export interface IAuthContext {
   user: IUser | null;
   token: string | null;
   auth: boolean;
-  error: unknown | null;
-  signin: (data: data) => Promise<void>;
-  signup: (data: data) => Promise<void>;
+  error: string | null;
+  signin: (data: authData) => Promise<void>;
+  signup: (data: authData) => Promise<void>;
+  clearError: () => void;
 }
+
+export type authData = {
+  cpf: string;
+  password: string;
+  remember: boolean;
+};
 
 export type data = {
   cpf: string;

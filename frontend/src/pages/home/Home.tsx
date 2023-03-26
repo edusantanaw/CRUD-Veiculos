@@ -1,9 +1,12 @@
-import React from 'react'
+import React from "react";
+import Cars from "./components/Cars";
 
 const Home = () => {
   return (
-    <div>Home</div>
-  )
-}
+    <div>
+      <Cars />
+    </div>
+  );
+};
 
-export default Home
+export default Home;

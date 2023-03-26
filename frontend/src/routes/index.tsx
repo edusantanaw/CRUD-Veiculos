@@ -1,30 +1,34 @@
-import React from "react";
 import {
   BrowserRouter as Router,
-  Routes,
-  Route,
   Navigate,
+  Route,
+  Routes,
 } from "react-router-dom";
-import { useAuth } from "../hooks/useAuth";
+import { useVerifyAuth } from "../hooks/useVerifyAuth";
 import Signin from "../pages/auth/Signin";
 import Signup from "../pages/auth/Signup";
 import Home from "../pages/home/Home";
+import Header from "../shared/layout/Header";
 
 const Index = () => {
-  const { auth } = useAuth();
+  const { isAuth } = useVerifyAuth();
 
   return (
     <Router>
+      {isAuth && <Header />}
       <Routes>
         <Route
           path="/signin"
-          element={!auth ? <Signin /> : <Navigate to="/" />}
+          element={!isAuth ? <Signin /> : <Navigate to="/" />}
         />
         <Route
           path="/signup"
-          element={!auth ? <Signup /> : <Navigate to="/" />}
+          element={!isAuth ? <Signup /> : <Navigate to="/" />}
         />
-        <Route path="/" element={auth ? <Home /> : <Navigate to="signin" />} />
+        <Route
+          path="/"
+          element={isAuth ? <Home /> : <Navigate to="/signin" />}
+        />
       </Routes>
     </Router>
   );

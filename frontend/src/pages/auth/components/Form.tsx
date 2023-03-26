@@ -1,30 +1,39 @@
-import React, { useRef } from "react";
-import { FormContainer } from "../styles";
 import {
-  TextField,
   Button,
   Checkbox,
   FormControlLabel,
   FormGroup,
+  TextField,
+  Typography,
 } from "@mui/material";
+import React, { useRef, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import { useAuth } from "../../../hooks/useAuth";
-import { data } from "../../../shared/types/auth";
+import { authData } from "../../../shared/types/auth";
+import { FormContainer } from "../styles";
 
 interface props {
-  service: (data: data) => Promise<void>;
+  service: (data: authData) => Promise<void>;
 }
 
 function Form({ service }: props) {
   const cpfRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
+  const rememberRef = useRef<HTMLInputElement | null>(null);
 
-  const { error } = useAuth();
+  const location = useLocation();
+  const { error, clearError } = useAuth();
+
+  useEffect(() => {
+    if (error) clearError();
+  }, [location.pathname]);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
+    const remember = rememberRef.current!.checked;
     const cpf = cpfRef.current!.value;
     const password = passwordRef.current!.value;
-    await service({ password, cpf });
+    await service({ password, cpf, remember });
   }
 
   return (
@@ -50,9 +59,16 @@ function Form({ service }: props) {
       </FormGroup>
       <FormControlLabel
         sx={{ "& .MuiSvgIcon-root": { fontSize: 20 } }}
-        control={<Checkbox size="small" color="secondary" />}
+        control={
+          <Checkbox size="small" color="secondary" inputRef={rememberRef} />
+        }
         label="Manter-me logado"
       />
+      {error && (
+        <Typography color="red" textAlign="center">
+          {error}
+        </Typography>
+      )}
       <Button
         variant="contained"
         color="secondary"
@@ -61,7 +77,6 @@ function Form({ service }: props) {
       >
         Enviar
       </Button>
-      {error && <span>{String(error)}</span>}
     </FormContainer>
   );
 }
