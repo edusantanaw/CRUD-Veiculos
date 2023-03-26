@@ -1,9 +1,16 @@
 import { IUser } from "../../types/user";
-import { prisma, user } from "../prisma";
+import { user } from "../prisma";
 
 export class UserRepository {
   public async create(data: IUser) {
-    const newUser = await user.create({ data: data });
+    const newUser = await user.create({
+      data: data,
+      select: {
+        password: false,
+        id: true,
+        cpf: true,
+      },
+    });
     return newUser as IUser;
   }
 

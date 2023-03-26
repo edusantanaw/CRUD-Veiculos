@@ -8,8 +8,8 @@ export const Container = styled.section`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-
   gap: 0.1em;
+
   svg {
     font-size: 4em;
   }
@@ -18,12 +18,21 @@ export const Container = styled.section`
     font-size: 2em;
     font-weight: 400;
   }
+
+  a {
+    text-decoration: underline;
+    color: blueviolet;
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
 `;
 
-export const Form = styled(FormGroup)`
+export const FormContainer = styled(FormGroup)`
   display: flex;
   flex-direction: column;
   width: 26em;
   padding: 1em;
-  gap: 1.5em;
+  gap: 1em;
 `;
