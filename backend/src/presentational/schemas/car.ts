@@ -13,7 +13,7 @@ const carShcmea = {
   brand: z
     .string({ required_error: "A marca do carro é necessaria" })
     .max(50, "A marca do carro devo conter no maximo 50 caracteres"),
-  renanam: z
+  renavam: z
     .string({ required_error: "O renavan é necessaria!" })
     .length(11, "O renavam deve conter 11 caracteres"),
   licensePlate: z

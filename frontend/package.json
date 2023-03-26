@@ -17,11 +17,13 @@
     "@mui/x-data-grid": "^6.0.3",
     "@types/styled-components": "^5.1.26",
     "axios": "^1.3.4",
+    "formik": "^2.2.9",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-input-mask": "3.0.0-alpha.2",
     "react-router-dom": "^6.9.0",
-    "styled-components": "^5.3.9"
+    "styled-components": "^5.3.9",
+    "yup": "^1.0.2"
   },
   "devDependencies": {
     "@types/react": "^18.0.28",
