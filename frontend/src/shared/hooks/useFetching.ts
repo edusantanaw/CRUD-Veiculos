@@ -5,7 +5,7 @@ import { makeHeaders } from "../utils/makeHeaders";
 
 interface props {
   url: string;
-  dependeces?: unknown[]
+  dependeces?: unknown[];
 }
 
 export function useFetching<T>({ url, dependeces = [] }: props) {
@@ -30,5 +30,9 @@ export function useFetching<T>({ url, dependeces = [] }: props) {
     setLoading(false);
   }
 
-  return { data, loading, error };
+  function addItem(item: T) {
+    setData((data) => [...data, item]);
+  }
+
+  return { data, loading, error, addItem };
 }

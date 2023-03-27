@@ -1,13 +1,5 @@
 import styled from "styled-components";
 
-export const boxStyles = {
-  width: "80%",
-  display: "flex",
-  justifyContent: "space-between",
-  alignItems: "center",
-  padding: "1em 0.1em",
-};
-
 export const Form = styled.form`
   display: flex;
   flex-direction: column;

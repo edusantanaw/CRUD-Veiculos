@@ -1,35 +1,11 @@
-import { GridColDef } from "@mui/x-data-grid";
+import {
+  GridColDef,
+  GridRenderCellParams,
+  GridTreeNodeWithRender,
+} from "@mui/x-data-grid";
 import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
 import DeleteIcon from "@mui/icons-material/Delete";
 import LocalGasStationIcon from "@mui/icons-material/LocalGasStation";
-
-export const actions: GridColDef[] = [
-  {
-    field: "edit",
-    headerName: "Editar",
-    width: 90,
-    sortable: false,
-    align: "center",
-    headerAlign: "center",
-    renderCell: (param) => (
-      <ModeEditOutlineIcon
-        onClick={() => console.log(param.row.id)}
-        sx={{ cursor: "pointer", color: "blueviolet" }}
-      />
-    ),
-  },
-  {
-    field: "remove",
-    headerName: "Remover",
-    width: 130,
-    sortable: false,
-    align: "center",
-    headerAlign: "center",
-    renderCell: (para) => (
-      <DeleteIcon sx={{ cursor: "pointer", color: "red" }} />
-    ),
-  },
-];
 
 export const carColumns: GridColDef[] = [
   {
@@ -80,12 +56,59 @@ export const carColumns: GridColDef[] = [
     width: 110,
     align: "center",
     headerAlign: "center",
-    renderCell: (param) => (
+  },
+  
+];
+
+type Action<T, R> = (data: T) => R;
+
+export function makeRemove<T, R>(fn: Action<T, R>) {
+  return {
+    field: "remove",
+    headerName: "Remover",
+    width: 130,
+    sortable: false,
+    align: "center",
+    headerAlign: "center",
+    renderCell: (
+      param: GridRenderCellParams<any, any, any, GridTreeNodeWithRender>
+    ) => (
+      <DeleteIcon
+        onClick={() => fn(param.row.id)}
+        sx={{ cursor: "pointer", color: "red" }}
+      />
+    ),
+  };
+}
+
+export function makeSupply<T, R>(fn: Action<T, R>) {
+  return {
+    renderCell: (
+      param: GridRenderCellParams<any, any, any, GridTreeNodeWithRender>
+    ) => (
       <LocalGasStationIcon
-        onClick={() => console.log(param.row.id)}
+        onClick={() => fn(param.row.id)}
         sx={{ cursor: "pointer", color: "blueviolet" }}
       />
     ),
-  },
-  ...actions,
-];
+  };
+}
+
+export function makeEdit<T, R>(fn: Action<T, R>) {
+  return {
+    field: "edit",
+    headerName: "Editar",
+    width: 90,
+    sortable: false,
+    align: "center",
+    headerAlign: "center",
+    renderCell: (
+      param: GridRenderCellParams<any, any, any, GridTreeNodeWithRender>
+    ) => (
+      <ModeEditOutlineIcon
+        onClick={() => fn(param.row.id)}
+        sx={{ cursor: "pointer", color: "blueviolet" }}
+      />
+    ),
+  };
+}
