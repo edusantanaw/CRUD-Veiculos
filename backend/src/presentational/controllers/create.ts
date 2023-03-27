@@ -8,7 +8,7 @@ import {
 import { IController } from "../presentational/controller";
 import { ISchemaValidator } from "../presentational/helpers/validator";
 
-export class CreateCarController<T, P> implements IController {
+export class CreateController<T, P> implements IController {
   constructor(
     private readonly schemaValidator: ISchemaValidator<T>,
     private readonly createUsecase: ICreateUsecase<T, P>

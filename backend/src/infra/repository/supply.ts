@@ -1,35 +1,30 @@
-import { randomUUID } from "node:crypto";
+import { ISuplly } from "../../types/supply";
+import { supply } from "../prisma";
 
-type data = {
-  id?: string;
-  carId: string;
-  quantitySupplied: number;
-  typeFuel: string;
-  price: number;
-};
-
-export class Supply {
-  private id: string;
-  private carId: string;
-  private quantitySupplied: number;
-  private typeFuel: string;
-  private price: number;
-
-  constructor(data: data) {
-    this.id = data.id ?? randomUUID();
-    this.carId = data.carId;
-    this.quantitySupplied = data.quantitySupplied;
-    this.typeFuel = data.typeFuel;
-    this.price = data.price; //should be calculete with type of fuel price * quantity?
+export class SupplyRepository {
+  public async create(data: ISuplly) {
+    const newSupply = await supply.create({ data: data });
+    return newSupply as ISuplly;
   }
 
-  getSupply() {
-    return {
-      id: this.id,
-      carId: this.carId,
-      quantitySupplied: this.quantitySupplied,
-      typeFuel: this.typeFuel,
-      price: this.price,
-    };
+  public async loadById(id: string) {
+    const supplyLoaded = await supply.findFirst({ where: { id } });
+    return supplyLoaded as ISuplly;
+  }
+
+  public async delete(id: string) {
+    await supply.update({
+      where: {
+        id: id,
+      },
+      data: {
+        deleted: true,
+      },
+    });
+  }
+
+  public async loadAll() {
+    const supplus = await supply.findMany();
+    return supplus as ISuplly[];
   }
 }

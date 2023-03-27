@@ -2,12 +2,22 @@ import { makeCarHelper } from "../../../test/helpers/makeCar";
 import { SchemaValidatorSpy } from "../../../test/mocks/helpers/schemaValidator";
 import { CreateCarUsecaseSpy } from "../../../test/mocks/usecases/createCar";
 import { carParams } from "../../data/protocols/repository/createCar";
-import { CreateCarController } from "./create";
+import { ICar } from "../../types/car";
+import { CreateController } from "./create";
+
+type data = {
+   model: string;
+    licensePlate: string;
+    color: string;
+    power: number;
+    brand: string;
+    renavam: string;
+}
 
 function makeSut() {
   const schemaValidator = new SchemaValidatorSpy();
   const createCarUsecase = new CreateCarUsecaseSpy();
-  const createCarController = new CreateCarController(
+  const createCarController = new CreateController<data, ICar>(
     schemaValidator,
     createCarUsecase
   );

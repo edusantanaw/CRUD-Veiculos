@@ -1,5 +1,5 @@
 import { ICreateUsecase } from "../../domain/usecases/create";
-import { Supply } from "../../infra/repository/supply";
+import { Supply } from "../../domain/entities/supply";
 import { ICar } from "../../types/car";
 import { ISuplly } from "../../types/supply";
 import { ICreateRepository } from "../protocols/repository/create";
