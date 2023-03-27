@@ -7,8 +7,9 @@ import {
 import { useVerifyAuth } from "../shared/hooks/useVerifyAuth";
 import Signin from "../pages/auth/Signin";
 import Signup from "../pages/auth/Signup";
-import Home from "../pages/home/Home";
+import Cars from "../pages/cars/Cars";
 import Header from "../shared/layout/Header";
+import Supply from "../pages/supply/Supply";
 
 const Index = () => {
   const { isAuth } = useVerifyAuth();
@@ -27,7 +28,11 @@ const Index = () => {
         />
         <Route
           path="/"
-          element={isAuth ? <Home /> : <Navigate to="/signin" />}
+          element={isAuth ? <Cars /> : <Navigate to="/signin" />}
+        />
+        <Route
+          path="/abastecimento"
+          element={isAuth ? <Supply /> : <Navigate to="/signin" />}
         />
       </Routes>
     </Router>

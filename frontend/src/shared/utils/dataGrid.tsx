@@ -7,6 +7,43 @@ import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
 import DeleteIcon from "@mui/icons-material/Delete";
 import LocalGasStationIcon from "@mui/icons-material/LocalGasStation";
 
+export const supplyColumns: GridColDef[] = [
+  {
+    field: "id",
+    headerName: "id",
+    width: 150,
+    align: "center",
+    headerAlign: "center",
+  },
+  {
+    field: "carId",
+    headerName:"Carro id",
+    width: 150,
+    align: "center",
+    headerAlign: "center",
+  },
+  {
+    field: "typeFuel",
+    headerName:"Combustivel",
+    width: 150,
+    align: "center",
+    headerAlign: "center",
+  },
+  {
+    field: "price",
+    headerName:"Preço",
+    width: 150,
+    align: "center",
+    headerAlign: "center",
+  },
+  {
+    field: "quantitySupplied",
+    headerName:"Quantidade",
+    width: 150,
+    align: "center",
+    headerAlign: "center",
+  }
+]
 export const carColumns: GridColDef[] = [
   {
     field: "id",
@@ -74,7 +111,7 @@ export function makeRemove<T, R>(fn: Action<T, R>) {
       param: GridRenderCellParams<any, any, any, GridTreeNodeWithRender>
     ) => (
       <DeleteIcon
-        onClick={() => fn(param.row.id)}
+        onClick={() => fn(param.row)}
         sx={{ cursor: "pointer", color: "red" }}
       />
     ),
@@ -87,7 +124,7 @@ export function makeSupply<T, R>(fn: Action<T, R>) {
       param: GridRenderCellParams<any, any, any, GridTreeNodeWithRender>
     ) => (
       <LocalGasStationIcon
-        onClick={() => fn(param.row.id)}
+        onClick={() => fn(param.row)}
         sx={{ cursor: "pointer", color: "blueviolet" }}
       />
     ),
@@ -106,7 +143,7 @@ export function makeEdit<T, R>(fn: Action<T, R>) {
       param: GridRenderCellParams<any, any, any, GridTreeNodeWithRender>
     ) => (
       <ModeEditOutlineIcon
-        onClick={() => fn(param.row.id)}
+        onClick={() => fn(param.row)}
         sx={{ cursor: "pointer", color: "blueviolet" }}
       />
     ),

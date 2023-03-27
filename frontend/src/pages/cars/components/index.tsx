@@ -1,31 +1,31 @@
 import { useState } from "react";
 import { GridColDef } from "@mui/x-data-grid";
-import Grid from "../../../../shared/components/dataGrid/DataGridGeneric";
-import { usePost } from "../../../../shared/hooks/usePost";
-import { IUser } from "../../../../shared/types/user";
+import Grid from "../../../shared/components/dataGrid/DataGridGeneric";
 import {
   carColumns,
   makeEdit,
   makeRemove,
-} from "../../../../shared/utils/dataGrid";
+} from "../../../shared/utils/dataGrid";
 import Top from "./Top";
-import { ICar } from "../../../../shared/types/car";
-import { useFetching } from "../../../../shared/hooks/useFetching";
+import { ICar } from "../../../shared/types/car";
+import { useFetching } from "../../../shared/hooks/useFetching";
+import { usePostOrPut } from "../../../shared/hooks/usePostOrPutt";
 
 interface props {
-  handleEdit: (id: string) => void;
-  handleRemove: (id: string) => void;
+  handleEdit: (car: ICar | null) => void;
+  handleRemove: (car: ICar | null) => void;
   id?: string;
 }
 
 export function Car({ handleEdit, handleRemove }: props) {
   const [newItem, setNewItem] = useState<ICar | null>(null);
 
-  const { data, error, loading, addItem } = useFetching<ICar>({
+  const { data, error, loading } = useFetching<ICar>({
     url: "/car",
+    dependeces: [newItem],
   });
 
-  const post = usePost<ICar>();
+  const post = usePostOrPut<ICar>({ method: "post" });
 
   const carColumn = [
     ...carColumns,
@@ -35,8 +35,8 @@ export function Car({ handleEdit, handleRemove }: props) {
 
   async function handleCreate(data: any) {
     const response = await post({ url: "/car", data });
-    if (!response.error && response.response) {
-      addItem(response.response);
+    if (response.response) {
+      setNewItem(() => response.response);
     }
     return response;
   }

@@ -8,7 +8,11 @@ type data<T> = {
   data: T;
 };
 
-export function usePost<T>() {
+interface props {
+  method: "post" | "put" | "patch"; 
+}
+
+export function usePostOrPut<T>({ method = "post" }: props) {
   const [response, setResponse] = useState<T | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -22,7 +26,7 @@ export function usePost<T>() {
   return async <P>({ url, data }: data<P>) => {
     if (error || !loading) resetStatus(); //case first request fail
     try {
-      const res = await Api.post<T>(url, data, makeHeaders());
+      const res = await Api[method]<T>(url, data, makeHeaders());
       setResponse(res.data);
     } catch (error) {
       const message = error as AxiosError<string>;

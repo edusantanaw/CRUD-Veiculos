@@ -1,4 +1,4 @@
-import {createGlobalStyle} from 'styled-components'
+import styled, {createGlobalStyle} from 'styled-components'
 
 export const GlobalStyles = createGlobalStyle`
     * {
@@ -16,3 +16,12 @@ export const GlobalStyles = createGlobalStyle`
         color: #000;
     }
 `
+
+export  const Container = styled.section`
+width: 100%;
+height: 100%;
+padding: 1em 3em;
+display: flex;
+align-items: center;
+flex-direction: column;
+`;

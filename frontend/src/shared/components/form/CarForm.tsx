@@ -3,27 +3,30 @@ import { useState } from "react";
 import { carSchema } from "../../validation/schema/car";
 import { TextField } from "@mui/material";
 import { Form } from "./styles";
-
-const initialValues = {
-  model: "",
-  brand: "",
-  color: "",
-  licensePlate: "",
-  power: 0,
-  renavam: "",
-};
+import { ICar } from "../../types/car";
 
 interface props<T> {
   handleClose: () => void;
   handleCreate: (
     data: T
   ) => Promise<{ error: string | null; loading: boolean }>;
+  car?: ICar;
 }
 
-function CarForm<T>({ handleClose, handleCreate }: props<T>) {
+function CarForm<T>({ handleClose, handleCreate, car }: props<T>) {
   const [messageError, setMessageError] = useState<string | null>(null);
 
+  const initialValues = {
+    model: car?.model ?? "",
+    brand: car?.brand ?? "",
+    color: car?.color ?? "",
+    licensePlate: car?.licensePlate ?? "",
+    power: car?.power ?? 0,
+    renavam: car?.renavam ?? "",
+  };
+
   async function handleSubmit(data: T) {
+    console.log(data);
     const { loading, error } = await handleCreate(data);
     if (!error) {
       handleClose();
@@ -43,6 +46,7 @@ function CarForm<T>({ handleClose, handleCreate }: props<T>) {
       <div className="inputs">
         <TextField
           id="filled-basic"
+          defaultValue={car?.model}
           value={formik.values.model}
           label="Modelo"
           name="model"

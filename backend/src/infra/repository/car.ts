@@ -18,7 +18,11 @@ export class CarRepository {
   }
 
   public async loadAll() {
-    const cars = await car.findMany();
+    const cars = await car.findMany({
+      where: {
+        deleted: false
+      }
+    });
     return cars as ICar[];
   }
 

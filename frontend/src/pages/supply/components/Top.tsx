@@ -1,18 +1,10 @@
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import { Box, Button, Modal, Typography } from "@mui/material";
 import { useState } from "react";
-import CarForm from "../../../../shared/components/carForm/CarForm";
-
-type dataCreate = {
-  model: string;
-  color: string;
-  licensePlate: string;
-  power: number;
-  brand: string;
-  renavam: string;
-};
+import SupplyForm from "../../../shared/components/form/SupplyForm";
 
 export const boxStyles = {
+  marginTop: "2em",
   width: "80%",
   display: "flex",
   justifyContent: "space-between",
@@ -22,7 +14,7 @@ export const boxStyles = {
 
 interface props {
   handleCreate: (
-    data: dataCreate
+    data: any
   ) => Promise<{ error: string | null; loading: boolean }>;
 }
 const Top = ({ handleCreate }: props) => {
@@ -52,10 +44,10 @@ const Top = ({ handleCreate }: props) => {
             borderRadius: "10px",
           }}
         >
-          <CarForm handleClose={handleModal} handleCreate={handleCreate} />
+          <SupplyForm handleClose={handleModal} handleCreate={handleCreate} />
         </Box>
       </Modal>
-      <Typography fontSize="1.5em">Carros</Typography>
+      <Typography fontSize="1.5em">Reabastecer</Typography>
       <Button
         variant="contained"
         color="secondary"
