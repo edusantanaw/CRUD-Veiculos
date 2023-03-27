@@ -1,5 +1,5 @@
 import { createContext, useState, useLayoutEffect, useEffect } from "react";
-import { userKey, tokenKey } from "../../constants/keys";
+import { userKey, tokenKey } from "../constants/keys";
 import { signinService, signupService } from "../../services/auth";
 import { authData, IAuthContext } from "../types/auth";
 import { IUser } from "../types/user";

@@ -8,7 +8,7 @@ import {
 } from "@mui/material";
 import React, { useRef, useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import { useAuth } from "../../../hooks/useAuth";
+import { useAuth } from "../../../shared/hooks/useAuth";
 import { authData } from "../../../shared/types/auth";
 import { FormContainer } from "../styles";
 

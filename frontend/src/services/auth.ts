@@ -1,6 +1,6 @@
 import { data } from "../shared/types/auth";
 import { IUser } from "../shared/types/user";
-import { Api } from "../utils/Api";
+import { Api } from "../shared/utils/Api";
 
 type authResponse = {
   user: IUser;

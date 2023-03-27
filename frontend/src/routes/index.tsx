@@ -4,7 +4,7 @@ import {
   Route,
   Routes,
 } from "react-router-dom";
-import { useVerifyAuth } from "../hooks/useVerifyAuth";
+import { useVerifyAuth } from "../shared/hooks/useVerifyAuth";
 import Signin from "../pages/auth/Signin";
 import Signup from "../pages/auth/Signup";
 import Home from "../pages/home/Home";

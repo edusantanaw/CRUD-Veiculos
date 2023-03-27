@@ -5,9 +5,10 @@ import { makeHeaders } from "../utils/makeHeaders";
 
 interface props {
   url: string;
+  dependeces?: unknown[]
 }
 
-export function useFetching<T>({ url }: props) {
+export function useFetching<T>({ url, dependeces = [] }: props) {
   const [data, setData] = useState<T[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -16,7 +17,7 @@ export function useFetching<T>({ url }: props) {
     (async () => {
       await fetchData();
     })();
-  }, []);
+  }, dependeces);
 
   async function fetchData() {
     try {

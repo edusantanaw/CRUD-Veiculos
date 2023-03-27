@@ -3,7 +3,7 @@ import { Box, TextField } from "@mui/material";
 import { useFormik } from "formik";
 import { Form } from "./styles";
 import { carSchema } from "../../../shared/validation/schema/car";
-import { usePost } from "../../../hooks/usePost";
+import { usePost } from "../../../shared/hooks/usePost";
 
 type dataCarCreate = {
   model: string;
@@ -14,21 +14,26 @@ type dataCarCreate = {
   renavam: string;
 };
 
+const initialValues = {
+  model: "",
+  brand: "",
+  color: "",
+  licensePlate: "",
+  power: 0,
+  renavam: "",
+};
+
 const NewCar = () => {
-  const post = usePost({ url: "/car" });
+  
+  const post = usePost();
+  
   async function handleCreate(data: dataCarCreate) {
-    const { response, error } = await post(data);
+    const { response, error } = await post({ data, url: "/car" });
     console.log(response, error);
   }
+
   const formik = useFormik({
-    initialValues: {
-      model: "",
-      brand: "",
-      color: "",
-      licensePlate: "",
-      power: 0,
-      renavam: "",
-    },
+    initialValues,
     onSubmit: async (values) => await handleCreate(values),
     validationSchema: carSchema,
   });

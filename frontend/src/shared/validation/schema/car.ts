@@ -1,6 +1,5 @@
 import * as yup from "yup";
 
-
 export const carSchema = yup.object().shape({
     model: yup
       .string()
@@ -12,6 +11,7 @@ export const carSchema = yup.object().shape({
       .max(35, "A cor deve ter no maximo 35 caracteres!"),
     power: yup
       .number()
+      .min(1, "A potencia do carro é necessario!")
       .required("A potencia do carro é necessario!")
       .max(9999, "A potencia deve ter no maximo 4 digitos"),
     brand: yup
