@@ -1,25 +1,13 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
-import { useFetching } from "../../hooks/useFetching";
 
-interface props<T> {
-  url: string;
+interface props<T, R> {
+
   column: GridColDef<any, any, any>[];
-  newItem?: T;
+  rows: R[];
 }
 
-function Grid<T>({ url, column, newItem }: props<T>) {
-  const { data, error, loading, addItem } = useFetching<T>({ url });
-  useEffect(() => {
-    if (newItem) addItem(newItem);
-  }, [newItem]);
-
-  const rows = data.map((item) => {
-    return {
-      ...item,
-    };
-  });
-
+function Grid<T, R>({  column, rows }: props<T, R>) {
   return (
     <div style={{ height: 300, width: "80%" }}>
       <DataGrid

@@ -1,9 +1,8 @@
 import { useFormik } from "formik";
-import React, { useState } from "react";
+import { useState } from "react";
 import { carSchema } from "../../validation/schema/car";
 import { TextField } from "@mui/material";
 import { Form } from "./styles";
-import { usePost } from "../../hooks/usePost";
 
 const initialValues = {
   model: "",

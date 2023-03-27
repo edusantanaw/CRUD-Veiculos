@@ -31,7 +31,7 @@ export function useFetching<T>({ url, dependeces = [] }: props) {
   }
 
   function addItem(item: T) {
-    setData((data) => [...data, item]);
+    setData((data) => [item, ...data]);
   }
 
   return { data, loading, error, addItem };

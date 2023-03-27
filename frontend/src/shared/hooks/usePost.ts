@@ -22,8 +22,8 @@ export function usePost<T>() {
   return async <P>({ url, data }: data<P>) => {
     if (error || !loading) resetStatus(); //case first request fail
     try {
-      const response = await Api.post<T>(url, data, makeHeaders());
-      setResponse(response.data);
+      const res = await Api.post<T>(url, data, makeHeaders());
+      setResponse(res.data);
     } catch (error) {
       const message = error as AxiosError<string>;
       setError(message.response!.data);

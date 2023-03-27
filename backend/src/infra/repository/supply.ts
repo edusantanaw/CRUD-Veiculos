@@ -23,6 +23,11 @@ export class SupplyRepository {
     });
   }
 
+  public async loadByCarId(carId: string) {
+    const data = await supply.findMany({ where: { carId } });
+    return data;
+  }
+
   public async loadAll() {
     const supplus = await supply.findMany();
     return supplus as ISuplly[];

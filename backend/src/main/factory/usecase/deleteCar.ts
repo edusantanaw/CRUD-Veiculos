@@ -1,7 +1,9 @@
-import { DeleteUsecase } from "../../../data/usecases/delete";
+import { DeleteCarUsecase } from "../../../data/usecases/deleteCar";
 import { CarRepository } from "../../../infra/repository/car";
+import { SupplyRepository } from "../../../infra/repository/supply";
 
 export function makeDeleteCarUsecase() {
   const carRepository = new CarRepository();
-  return new DeleteUsecase(carRepository);
+  const supplyRepository = new SupplyRepository();
+  return new DeleteCarUsecase(supplyRepository, carRepository);
 }
