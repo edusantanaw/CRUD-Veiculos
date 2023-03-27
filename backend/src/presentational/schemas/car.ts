@@ -19,7 +19,7 @@ const carShcmea = {
   licensePlate: z
     .string({ required_error: "A placa do carro é necessaria!" })
     .regex(
-      /^([A-Z]{3}\-\d{4})|([A-Z]{4}\d{3})$/,
+      /^[A-Z]{3}[0-9]{4}$/,
       "A placa do veículo não está em um formato válido"
     ),
 };

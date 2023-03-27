@@ -3,19 +3,30 @@ import { Box, TextField } from "@mui/material";
 import { useFormik } from "formik";
 import { Form } from "./styles";
 import { carSchema } from "../../../shared/validation/schema/car";
+import { usePost } from "../../../hooks/usePost";
 
-async function handleCreate(data: any) {
-  console.log(data);
-}
+type dataCarCreate = {
+  model: string;
+  color: string;
+  licensePlate: string;
+  power: number;
+  brand: string;
+  renavam: string;
+};
 
 const NewCar = () => {
+  const post = usePost({ url: "/car" });
+  async function handleCreate(data: dataCarCreate) {
+    const { response, error } = await post(data);
+    console.log(response, error);
+  }
   const formik = useFormik({
     initialValues: {
       model: "",
       brand: "",
       color: "",
       licensePlate: "",
-      power: "",
+      power: 0,
       renavam: "",
     },
     onSubmit: async (values) => await handleCreate(values),
@@ -77,6 +88,7 @@ const NewCar = () => {
             value={formik.values.power}
             label="Potencia"
             name="power"
+            type="number"
             variant="filled"
             error={formik.touched.power && Boolean(formik.errors.power)}
             helperText={formik.touched.power && formik.errors.power}
