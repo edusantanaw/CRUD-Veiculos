@@ -13,20 +13,27 @@ export type ICar = {
   renavam: string;
 };
 
-const rows: GridRowsProp = [
-  { id: 1, col1: "Hello", col2: "World" },
-  { id: 2, col1: "DataGridPro", col2: "is Awesome" },
-  { id: 3, col1: "MUI", col2: "is Amazing" },
-];
-
 const columns: GridColDef[] = [
-  { field: "col1", headerName: "Column 1", width: 150 },
-  { field: "col2", headerName: "Column 2", width: 150 },
+  { field: "id", headerName: "id", width: 150 },
+  { field: "model", headerName: "Modelo", width: 150 },
+  { field: "power", headerName: "Potência", width: 150 },
+  { field: "brand", headerName: "Marca", width: 150 },
+  { field: "licensePlate", headerName: "Placa", width: 150 },
+  { field: "renavam", headerName: "Renavam", width: 150 },
 ];
 
 const Cars = () => {
   const { data, error, loading } = useFetching<ICar>({ url: "/car" });
-  console.log(data);
+  const rows: any = data.map((item) => {
+    return {
+      id: item.id,
+      model: item.model,
+      power: item.power,
+      brand: item.brand,
+      licensePlate: item.licensePlate,
+      renavam: item.renavam,
+    };
+  });
   return (
     <div style={{ height: 300, width: "80%" }}>
       <DataGrid rows={rows} columns={columns} />

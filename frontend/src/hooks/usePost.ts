@@ -19,12 +19,11 @@ export function usePost<T>({ url }: props) {
   };
 
   return async (data: T) => {
-    resetStatus(); //case first request fail
+    if (error || !loading) resetStatus(); //case first request fail
     try {
       const response = await Api.post<T>(url, data, makeHeaders());
       setResponse(response.data);
     } catch (error) {
-      console.log(error);
       const message = error as AxiosError<string>;
       setError(message.response!.data);
     }

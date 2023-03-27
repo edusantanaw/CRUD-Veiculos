@@ -32,6 +32,18 @@ model Car {
   createdAt    DateTime @default(now())
   updatedAt    DateTime @default(now()) @updatedAt
   deleted      Boolean  @default(false)
+  Supply       Supply[]
 
   @@map("car")
+}
+
+model Supply {
+  id               String @id
+  car              Car    @relation(fields: [carId], references: [id])
+  carId            String
+  price            Int
+  quantitySupplied Int
+  typeFuel         String
+
+  @@map("supply")
 }
