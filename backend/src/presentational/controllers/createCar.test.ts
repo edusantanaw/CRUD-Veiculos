@@ -2,7 +2,7 @@ import { makeCarHelper } from "../../../test/helpers/makeCar";
 import { SchemaValidatorSpy } from "../../../test/mocks/helpers/schemaValidator";
 import { CreateCarUsecaseSpy } from "../../../test/mocks/usecases/createCar";
 import { carParams } from "../../data/protocols/repository/createCar";
-import { CreateCarController } from "./createCar";
+import { CreateCarController } from "./create";
 
 function makeSut() {
   const schemaValidator = new SchemaValidatorSpy();
