@@ -1,4 +1,4 @@
-import { createContext, useState, useLayoutEffect, useEffect } from "react";
+import { createContext, useState, useLayoutEffect } from "react";
 import { userKey, tokenKey } from "../constants/keys";
 import { authService } from "../../services/auth";
 import { authData, IAuthContext } from "../types/auth";
@@ -26,7 +26,7 @@ export const AuthProvider = ({ children }: props) => {
   const [user, setUser] = useState<IUser | null>(null);
   const [token, setToken] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const [auth, setAuth] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(true)
 
   useLayoutEffect(() => {
     const local = getLocalStorage();
@@ -34,12 +34,11 @@ export const AuthProvider = ({ children }: props) => {
     if (local.token && local.user) {
       setUser(JSON.parse(local.user));
       setToken(local.token);
-      setAuth(true);
     } else if (session.token && session.user) {
       setUser(JSON.parse(session.user));
       setToken(session.token);
-      setAuth(true);
     }
+    setIsLoading(false)
   }, []);
 
   async function handleAuth(data: authData, url: string) {
@@ -49,11 +48,19 @@ export const AuthProvider = ({ children }: props) => {
       setUser(() => response.user);
       setToken(() => response.token);
       makeStorage({ ...response, remember });
-      setAuth(true);
       clearError();
     } catch (error) {
       setError(error as string);
     }
+  }
+
+  function logout() {
+    localStorage.removeItem(tokenKey);
+    localStorage.removeItem(userKey);
+    sessionStorage.removeItem(userKey);
+    sessionStorage.removeItem(tokenKey);
+    setToken(() => null);
+    setUser(() => null);
   }
 
   function clearError() {
@@ -76,7 +83,7 @@ export const AuthProvider = ({ children }: props) => {
 
   return (
     <AuthContext.Provider
-      value={{ auth, error, handleAuth, token, user, clearError }}
+      value={{isLoading,  error, logout, handleAuth, token, user, clearError }}
     >
       {children}
     </AuthContext.Provider>

@@ -1,15 +1,16 @@
 import {
-  Button,
   Checkbox,
   FormControlLabel,
   FormGroup,
   TextField,
-  Typography,
+  Typography
 } from "@mui/material";
-import React, { useRef, useEffect } from "react";
+import { useFormik } from "formik";
+import { useEffect, useRef } from "react";
 import { useLocation } from "react-router-dom";
 import { useAuth } from "../../../shared/hooks/useAuth";
 import { authData } from "../../../shared/types/auth";
+import { userSchema } from "../../../shared/validation/schema/user";
 import { FormContainer } from "../styles";
 
 interface props {
@@ -29,16 +30,30 @@ function Form({ service, url }: props) {
     if (error) clearError();
   }, [location.pathname]);
 
-  async function handleSubmit(e: React.FormEvent) {
-    e.preventDefault();
+  async function handleSubmit({
+    cpf,
+    password,
+  }: {
+    cpf: string;
+    password: string;
+  }) {
     const remember = rememberRef.current!.checked;
-    const cpf = cpfRef.current!.value;
-    const password = passwordRef.current!.value;
     await service({ password, cpf, remember }, url);
   }
 
+  const initialValues = {
+    cpf: "",
+    password: "",
+  };
+
+  const formik = useFormik({
+    initialValues,
+    onSubmit: async (values) => await handleSubmit(values),
+    validationSchema: userSchema,
+  });
+
   return (
-    <FormContainer onSubmit={handleSubmit}>
+    <FormContainer onSubmit={formik.handleSubmit}>
       <FormGroup
         sx={{ display: "flex", flexDirection: "column", gap: "1.5em" }}
       >
@@ -48,6 +63,11 @@ function Form({ service, url }: props) {
           variant="outlined"
           inputRef={cpfRef}
           color="secondary"
+          value={formik.values.cpf}
+          error={formik.touched.cpf && Boolean(formik.errors.cpf)}
+          onChange={formik.handleChange}
+          helperText={formik.touched.cpf && formik.errors.cpf}
+          onBlur={formik.handleBlur}
         />
         <TextField
           id="password"
@@ -55,6 +75,11 @@ function Form({ service, url }: props) {
           color="secondary"
           label="Password"
           variant="outlined"
+          value={formik.values.password}
+          error={formik.touched.password && Boolean(formik.errors.password)}
+          onChange={formik.handleChange}
+          helperText={formik.touched.password && formik.errors.password}
+          onBlur={formik.handleBlur}
           inputRef={passwordRef}
         />
       </FormGroup>
@@ -70,14 +95,7 @@ function Form({ service, url }: props) {
           {error}
         </Typography>
       )}
-      <Button
-        variant="contained"
-        color="secondary"
-        size="large"
-        onClick={handleSubmit}
-      >
-        Enviar
-      </Button>
+        <input type="submit" />
     </FormContainer>
   );
 }

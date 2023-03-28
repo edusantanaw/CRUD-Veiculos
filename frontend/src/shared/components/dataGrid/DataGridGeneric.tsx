@@ -14,7 +14,7 @@ function Grid<T>({ column = [], rows }: props<T>) {
   }, [rows]);
 
   return (
-    <div style={{ height: 300, width: "80%" }}>
+    <div style={{ height: 300, width: "100%" }} id="grid">
       <DataGrid
         autoHeight={true}
         checkboxSelection={true}

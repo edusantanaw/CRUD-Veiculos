@@ -13,7 +13,8 @@ const box = {
   background: "#fff",
   padding: "1em",
   borderRadius: "10px",
-};
+}
+;
 
 const Top = ({ handleCreate }: props) => {
   const [model, setModal] = useState<boolean>(false);

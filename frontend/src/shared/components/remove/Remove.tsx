@@ -17,8 +17,9 @@ const boxStyles = {
 interface props<T, R> {
   handleModal: (item: T) => void;
   open: boolean;
-  service: (id: string) => Promise<R>;
+  service: (id: string, url: string) => Promise<R>;
   item: T;
+  url: string;
 }
 
 function Remove<T extends byId, R>({
@@ -26,6 +27,7 @@ function Remove<T extends byId, R>({
   service,
   handleModal,
   item,
+  url
 }: props<T, R>) {
   const [error, setError] = useState<string | null>(null);
 
@@ -35,7 +37,7 @@ function Remove<T extends byId, R>({
 
   async function handleDelete() {
     try {
-      await service(item.id);
+      await service(item.id, url);
       handleModal(item);
     } catch (error) {
       const message = error as AxiosError<string>;

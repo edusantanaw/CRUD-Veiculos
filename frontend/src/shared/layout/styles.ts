@@ -15,4 +15,8 @@ export const HeaderContainer = styled.header`
         font-size: 1.2em;
     }
   }
+
+  svg{
+    cursor: pointer;
+  }
 `;

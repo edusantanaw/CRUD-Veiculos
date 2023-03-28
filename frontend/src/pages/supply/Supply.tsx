@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { deleteSupply } from "../../services/supply";
-import RemoveCar from "../../shared/components/remove/Remove";
+import { deleteService } from "../../services/delete";
+import RemoveSupply from "../../shared/components/remove/Remove";
 import { ISupply } from "../../shared/types/supply";
 import { Container } from "../../styles/Global";
 import Index from "./components";
@@ -23,11 +23,12 @@ const Supply = () => {
 
   return (
     <Container>
-      <RemoveCar
+      <RemoveSupply
         open={removeSupply}
         handleModal={handleRemoveSupplyModal}
         item={supply!}
-        service={deleteSupply}
+        service={deleteService}
+        url="supply"
       />
       <EditSupply
         handleModal={handleSupplyEdit}

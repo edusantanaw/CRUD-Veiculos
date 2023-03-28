@@ -4,9 +4,13 @@ import { useAuth } from "./useAuth";
 export function useVerifyAuth() {
   const [isAuth, setIsAuth] = useState(false);
 
-  const { auth } = useAuth();
+  const { user, token, isLoading } = useAuth();
+  
+
   useLayoutEffect(() => {
-    if (auth) setIsAuth(true);
-  }, [auth]);
+    if (user && token) setIsAuth(true);
+    else setIsAuth(false);
+  }, [user, token]);
+
   return { isAuth };
 }

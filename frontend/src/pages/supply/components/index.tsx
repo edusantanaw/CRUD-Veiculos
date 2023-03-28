@@ -1,4 +1,5 @@
 import { useState } from "react";
+import {Box} from '@mui/material'
 import { GridColDef } from "@mui/x-data-grid";
 import Grid from "../../../shared/components/dataGrid/DataGridGeneric";
 import { useFetching } from "../../../shared/hooks/useFetching";
@@ -14,7 +15,7 @@ import Top from "./Top";
 interface props {
   handleEdit: (supply: ISupply | null) => void;
   handleRemove: (supply: ISupply | null) => void;
-  dependeces: unknown[]
+  dependeces: unknown[];
 }
 
 const Index = ({ handleEdit, handleRemove, dependeces }: props) => {
@@ -44,10 +45,10 @@ const Index = ({ handleEdit, handleRemove, dependeces }: props) => {
   }
 
   return (
-    <>
+    <Box sx={{width: "80%"}} >
       <Top handleCreate={handleCreate} />
       <Grid rows={data} column={columns} />
-    </>
+    </Box>
   );
 };
 

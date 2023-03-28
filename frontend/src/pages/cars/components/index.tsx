@@ -10,6 +10,7 @@ import Top from "./Top";
 import { ICar } from "../../../shared/types/car";
 import { useFetching } from "../../../shared/hooks/useFetching";
 import { handlePost } from "../../../shared/utils/postOrPut";
+import {Box} from '@mui/material'
 
 interface props {
   handleEdit: (car: ICar | null) => void;
@@ -44,9 +45,9 @@ export function Car({ handleEdit, handleRemove, dependeces }: props) {
     return response;
   }
   return (
-    <>
+    <Box sx={{width: "80%"}} >
       <Top handleCreate={handleCreate} />
       <Grid column={carColumn} rows={data} />
-    </>
+    </Box>
   );
 }

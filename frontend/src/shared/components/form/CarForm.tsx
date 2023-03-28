@@ -43,11 +43,10 @@ function CarForm<T>({ handleClose, handleCreate, car }: props<T>) {
       <div className="inputs">
         <TextField
           id="filled-basic"
-          defaultValue={car?.model}
-          value={formik.values.model}
           label="Modelo"
           name="model"
           variant="filled"
+          value={formik.values.model}
           error={formik.touched.model && Boolean(formik.errors.model)}
           onChange={formik.handleChange}
           helperText={formik.touched.model && formik.errors.model}
@@ -119,6 +118,7 @@ function CarForm<T>({ handleClose, handleCreate, car }: props<T>) {
         />
         {messageError && <span>{messageError}</span>}
       </div>
+      
       <input type="submit" />
     </Form>
   );

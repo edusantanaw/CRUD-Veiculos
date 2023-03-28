@@ -4,7 +4,7 @@ import { ICar } from "../../shared/types/car";
 import { Container } from "../../styles/Global";
 import RemoveCar from "../../shared/components/remove/Remove";
 import { Car } from "./components";
-import { deleteCar } from "../../services/car";
+import { deleteService } from "../../services/delete";
 
 const Cars = () => {
   const [editCar, setEditCar] = useState(false);
@@ -25,7 +25,8 @@ const Cars = () => {
     <Container>
       <EditCar handleModal={handleCarEdit} open={editCar} car={car!} />
       <RemoveCar
-        service={deleteCar}
+        url="car"
+        service={deleteService}
         open={removeCar}
         item={car!}
         handleModal={handleRemoveCarModal}

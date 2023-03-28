@@ -29,10 +29,25 @@ export const Container = styled.section`
   }
 `;
 
-export const FormContainer = styled(FormGroup)`
+export const FormContainer = styled.form`
   display: flex;
   flex-direction: column;
   width: 26em;
   padding: 1em;
   gap: 1em;
+
+  input[type="submit"] {
+    align-self: center;
+    height: 3.5em;
+    width: 100%;
+    background-color: #9c27b0;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.2s;
+    &:active {
+      background-color: #9c27b7;
+    }
+  }
 `;

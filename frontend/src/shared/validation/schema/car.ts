@@ -21,6 +21,7 @@ export const carSchema = yup.object().shape({
     renavam: yup
       .string()
       .required("O renavan é necessaria!")
+      .matches(/[0-9]+$/, "Renavam invalido!")
       .length(11, "Deve ter 11 caracteres"),
     licensePlate: yup
       .string()
