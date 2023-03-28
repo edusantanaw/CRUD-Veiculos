@@ -6,9 +6,7 @@ import ModalComponent from "../../../shared/components/modal/ModalComponent";
 import { boxStyles } from "../../../styles/Global";
 
 interface props {
-  handleCreate: (
-    data: any
-  ) => Promise<{ error: string | null; loading: boolean }>;
+  handleCreate: (data: any) => Promise<{ message?: string }>;
 }
 
 const box = {

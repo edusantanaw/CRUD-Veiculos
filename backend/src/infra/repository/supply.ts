@@ -24,12 +24,12 @@ export class SupplyRepository {
   }
 
   public async loadByCarId(carId: string) {
-    const data = await supply.findMany({ where: { carId } });
+    const data = await supply.findMany({ where: { carId, deleted: false } });
     return data;
   }
 
   public async loadAll() {
-    const supplus = await supply.findMany();
+    const supplus = await supply.findMany({ where: { deleted: false } });
     return supplus as ISuplly[];
   }
 }

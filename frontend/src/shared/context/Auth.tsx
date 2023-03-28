@@ -42,20 +42,6 @@ export const AuthProvider = ({ children }: props) => {
     }
   }, []);
 
-  function makeStorage(data: {
-    user: IUser;
-    token: string;
-    remember: boolean;
-  }) {
-    if (data.remember) {
-      localStorage.setItem(userKey, JSON.stringify(data.user));
-      localStorage.setItem(tokenKey, data.token);
-      return;
-    }
-    sessionStorage.setItem(userKey, JSON.stringify(data.user));
-    sessionStorage.setItem(tokenKey, data.token);
-  }
-
   async function handleAuth(data: authData, url: string) {
     try {
       const { remember, ...rest } = data;
@@ -72,6 +58,20 @@ export const AuthProvider = ({ children }: props) => {
 
   function clearError() {
     setError(null);
+  }
+
+  function makeStorage(data: {
+    user: IUser;
+    token: string;
+    remember: boolean;
+  }) {
+    if (data.remember) {
+      localStorage.setItem(userKey, JSON.stringify(data.user));
+      localStorage.setItem(tokenKey, data.token);
+      return;
+    }
+    sessionStorage.setItem(userKey, JSON.stringify(data.user));
+    sessionStorage.setItem(tokenKey, data.token);
   }
 
   return (

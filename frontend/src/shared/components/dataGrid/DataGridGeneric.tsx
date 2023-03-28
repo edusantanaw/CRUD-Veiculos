@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 
-interface props<T, R> {
+interface props<T> {
   column: GridColDef<any, any, any>[];
-  rows: R[];
+  rows: T[];
 }
 
-function Grid<T, R>({ column = [], rows }: props<T, R>) {
-  const [list, setList] = useState<R[]>([]);
+function Grid<T>({ column = [], rows }: props<T>) {
+  const [list, setList] = useState<T[]>([]);
 
   useEffect(() => {
     setList(() => [...rows]);

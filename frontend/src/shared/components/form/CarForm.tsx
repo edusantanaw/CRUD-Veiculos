@@ -7,9 +7,7 @@ import { ICar } from "../../types/car";
 
 interface props<T> {
   handleClose: () => void;
-  handleCreate: (
-    data: T
-  ) => Promise<{ error: string | null; loading: boolean }>;
+  handleCreate: (data: T) => Promise<{ message?: string }>;
   car?: ICar;
 }
 
@@ -26,12 +24,12 @@ function CarForm<T>({ handleClose, handleCreate, car }: props<T>) {
   };
 
   async function handleSubmit(data: T) {
-    const { loading, error } = await handleCreate(data);
-    if (!error) {
+    const { message } = await handleCreate(data);
+    if (!message) {
       handleClose();
       return;
     }
-    setMessageError(error);
+    setMessageError(message);
   }
 
   const formik = useFormik({

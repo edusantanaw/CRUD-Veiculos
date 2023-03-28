@@ -1,6 +1,6 @@
-import { Box, Button, Modal, Typography } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import { AxiosError } from "axios";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ModalComponent from "../modal/ModalComponent";
 
 type byId = {
@@ -29,9 +29,14 @@ function Remove<T extends byId, R>({
 }: props<T, R>) {
   const [error, setError] = useState<string | null>(null);
 
+  useEffect(()=>{
+    if(error) setError(null);
+  }, [open])
+
   async function handleDelete() {
     try {
       await service(item.id);
+      handleModal(item);
     } catch (error) {
       const message = error as AxiosError<string>;
       setError(() => message.response!.data);

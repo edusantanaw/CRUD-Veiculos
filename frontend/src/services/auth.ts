@@ -9,7 +9,7 @@ type authResponse = {
 
 export const authService = async (data: data, url: string) => {
   try {
-    const response = await Api.post<authResponse>("/signin", data);
+    const response = await Api.post<authResponse>(url, data);
     return response.data;
   } catch (error) {
     const message = error as { response: { data: string } };

@@ -7,9 +7,7 @@ import { dataCreate } from "../../../shared/types/car";
 import { boxStyles } from "../../../styles/Global";
 
 interface props {
-  handleCreate: (
-    data: dataCreate
-  ) => Promise<{ error: string | null; loading: boolean }>;
+  handleCreate: (data: dataCreate) => Promise<{ message?: string }>;
 }
 const box = {
   background: "#fff",

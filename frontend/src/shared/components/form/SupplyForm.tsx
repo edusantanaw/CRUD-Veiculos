@@ -17,7 +17,7 @@ interface props {
   handleClose: () => void;
   handleCreate: (
     data: dataSupply
-  ) => Promise<{ error: string | null; loading: boolean }>;
+  ) => Promise<{ message?: string }>;
   supply?: ISupply;
 }
 
@@ -35,12 +35,12 @@ function SupplyForm({ handleClose, handleCreate, supply }: props) {
   };
 
   async function handleSubmit(data: dataSupply) {
-    const { loading, error } = await handleCreate(data);
-    if (!error) {
+    const { message } = await handleCreate(data);
+    if (!message) {
       handleClose();
       return;
     }
-    setMessageError(error);
+    setMessageError(message);
   }
 
   const formik = useFormik({

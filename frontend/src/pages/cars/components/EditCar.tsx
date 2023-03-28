@@ -1,8 +1,8 @@
 import { Box } from "@mui/material";
 import CarForm from "../../../shared/components/form/CarForm";
 import ModalComponent from "../../../shared/components/modal/ModalComponent";
-import { usePostOrPut } from "../../../shared/hooks/usePostOrPutt";
 import { ICar } from "../../../shared/types/car";
+import { handlePost } from "../../../shared/utils/postOrPut";
 
 interface props {
   open: boolean;
@@ -17,10 +17,12 @@ const boxStyles = {
 };
 
 const EditCar = ({ handleModal, car, open }: props) => {
-  const put = usePostOrPut<ICar>({ method: "put" });
-
   async function handleUpdate(data: any) {
-    const response = await put({ url: `/car/${car.id}`, data });
+    const response = await handlePost({
+      url: `/car/${car.id}`,
+      data,
+      method: "put",
+    });
     return response;
   }
 

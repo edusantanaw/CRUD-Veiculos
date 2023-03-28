@@ -30,7 +30,11 @@ const Cars = () => {
         item={car!}
         handleModal={handleRemoveCarModal}
       />
-      <Car handleEdit={handleCarEdit} handleRemove={handleRemoveCarModal} modal={editCar} />
+      <Car
+        handleEdit={handleCarEdit}
+        handleRemove={handleRemoveCarModal}
+        dependeces={[editCar, removeCar]}
+      />
     </Container>
   );
 };

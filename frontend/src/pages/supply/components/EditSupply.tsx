@@ -1,8 +1,8 @@
 import { Box } from "@mui/material";
 import SupplyForm from "../../../shared/components/form/SupplyForm";
 import ModalComponent from "../../../shared/components/modal/ModalComponent";
-import { usePostOrPut } from "../../../shared/hooks/usePostOrPutt";
 import { ISupply } from "../../../shared/types/supply";
+import { handlePost } from "../../../shared/utils/postOrPut";
 
 interface props {
   open: boolean;
@@ -17,10 +17,12 @@ const boxStyles = {
 };
 
 const EditSupply = ({ handleModal, supply, open }: props) => {
-  const put = usePostOrPut<ISupply>({ method: "put" });
-
   async function handleUpdate(data: any) {
-    const response = await put({ url: `/supply/${supply.id}`, data });
+    const response = await handlePost({
+      url: `/supply/${supply.id}`,
+      data,
+      method: "put",
+    });
     return response;
   }
 

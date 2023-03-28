@@ -9,23 +9,21 @@ import {
 import Top from "./Top";
 import { ICar } from "../../../shared/types/car";
 import { useFetching } from "../../../shared/hooks/useFetching";
-import { usePostOrPut } from "../../../shared/hooks/usePostOrPutt";
+import { handlePost } from "../../../shared/utils/postOrPut";
 
 interface props {
   handleEdit: (car: ICar | null) => void;
   handleRemove: (car: ICar | null) => void;
   id?: string;
-  modal: boolean;
+  dependeces: unknown[];
 }
 
-export function Car({ handleEdit, handleRemove, modal }: props) {
-  const [newItem, setNewItem] = useState<ICar | null>(null);
+export function Car({ handleEdit, handleRemove, dependeces }: props) {
+  const [newItem, setNewItem] = useState<ICar>();
 
-  const post = usePostOrPut<ICar>({ method: "post" });
-
-  const { data, error, loading } = useFetching<ICar>({
+  const { data, error, loading, addItem } = useFetching<ICar>({
     url: "/car",
-    dependeces: [newItem, modal],
+    dependeces: [newItem, ...dependeces],
   });
 
   const carColumn = [
@@ -35,13 +33,16 @@ export function Car({ handleEdit, handleRemove, modal }: props) {
   ] as GridColDef<any, any, any>[];
 
   async function handleCreate(data: any) {
-    const response = await post({ url: "/car", data });
-    if (response.response) {
-      setNewItem(() => response.response);
+    const response = await handlePost<any, ICar>({
+      url: "/car",
+      data,
+      method: "post",
+    });
+    if (response.success) {
+      setNewItem(() => response.data);
     }
     return response;
   }
-
   return (
     <>
       <Top handleCreate={handleCreate} />
