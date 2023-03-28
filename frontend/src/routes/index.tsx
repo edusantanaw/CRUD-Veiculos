@@ -4,12 +4,12 @@ import {
   Route,
   Routes,
 } from "react-router-dom";
-import { useVerifyAuth } from "../shared/hooks/useVerifyAuth";
 import Signin from "../pages/auth/Signin";
 import Signup from "../pages/auth/Signup";
 import Cars from "../pages/cars/Cars";
-import Header from "../shared/layout/Header";
 import Supply from "../pages/supply/Supply";
+import { useVerifyAuth } from "../shared/hooks/useVerifyAuth";
+import Header from "../shared/layout/Header";
 
 const Index = () => {
   const { isAuth } = useVerifyAuth();

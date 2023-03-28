@@ -5,6 +5,7 @@ import { usePostOrPut } from "../../shared/hooks/usePostOrPutt";
 import { dataSupply, ISupply } from "../../shared/types/supply";
 import { Container } from "../../styles/Global";
 import Index from "./components";
+import EditSupply from "./components/EditSupply";
 import Top from "./components/Top";
 
 const Supply = () => {
@@ -26,7 +27,6 @@ const Supply = () => {
 
   async function handleCreate(data: dataSupply) {
     const response = await post({ url: "/supply", data });
-    console.log(response);
     return response;
   }
 
@@ -38,6 +38,11 @@ const Supply = () => {
         handleModal={handleRemoveSupplyModal}
         item={supply!}
         service={deleteSupply}
+      />
+      <EditSupply
+        handleModal={handleSupplyEdit}
+        open={editSupply}
+        supply={supply!}
       />
       <Index
         handleEdit={handleSupplyEdit}

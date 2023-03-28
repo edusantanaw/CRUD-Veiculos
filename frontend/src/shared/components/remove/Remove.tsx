@@ -1,10 +1,17 @@
-import React, { useState } from "react";
-import { Modal, Box, Typography, Button } from "@mui/material";
+import { Box, Button, Modal, Typography } from "@mui/material";
 import { AxiosError } from "axios";
-import { ICar } from "../../types/car";
+import { useState } from "react";
+import ModalComponent from "../modal/ModalComponent";
 
 type byId = {
   id: string;
+};
+
+const boxStyles = {
+  width: "25em",
+  background: "#fff",
+  padding: "1.5em",
+  borderRadius: "5px",
 };
 
 interface props<T, R> {
@@ -14,7 +21,12 @@ interface props<T, R> {
   item: T;
 }
 
-function Remove<T extends byId, R>({ open, service, handleModal, item }: props<T, R>) {
+function Remove<T extends byId, R>({
+  open,
+  service,
+  handleModal,
+  item,
+}: props<T, R>) {
   const [error, setError] = useState<string | null>(null);
 
   async function handleDelete() {
@@ -27,30 +39,13 @@ function Remove<T extends byId, R>({ open, service, handleModal, item }: props<T
   }
 
   return (
-    <Modal
-      sx={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-      open={open}
-      onClose={handleModal}
-      aria-labelledby="modal-modal-title"
-      aria-describedby="modal-modal-description"
-    >
-      <Box
-        sx={{
-          width: "25em",
-          background: "#fff",
-          padding: "1.5em",
-          borderRadius: "5px",
-        }}
-      >
+    <ModalComponent handleModal={handleModal} open={open}>
+      <Box sx={boxStyles}>
         <Typography
           variant="subtitle1"
           sx={{ fontSize: "1.3em", paddingBottom: "1em" }}
         >
-          Realmente deseja excluir esse carro?
+          Realmente deseja excluir esse item?
         </Typography>
         <Box sx={{ display: "flex", justifyContent: "space-between" }}>
           <Button
@@ -70,10 +65,10 @@ function Remove<T extends byId, R>({ open, service, handleModal, item }: props<T
           >
             Nao
           </Button>
-          {error && <span>{error}</span>}
         </Box>
+        {error && <Typography color="error">{error}</Typography>}
       </Box>
-    </Modal>
+    </ModalComponent>
   );
 }
 

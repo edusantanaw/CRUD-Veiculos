@@ -5,8 +5,7 @@ export interface IAuthContext {
   token: string | null;
   auth: boolean;
   error: string | null;
-  signin: (data: authData) => Promise<void>;
-  signup: (data: authData) => Promise<void>;
+  handleAuth: (data: authData, url: string) => Promise<void>;
   clearError: () => void;
 }
 

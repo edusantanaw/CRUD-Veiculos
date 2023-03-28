@@ -30,7 +30,7 @@ const Cars = () => {
         item={car!}
         handleModal={handleRemoveCarModal}
       />
-      <Car handleEdit={handleCarEdit} handleRemove={handleRemoveCarModal} />
+      <Car handleEdit={handleCarEdit} handleRemove={handleRemoveCarModal} modal={editCar} />
     </Container>
   );
 };

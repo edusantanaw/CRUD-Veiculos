@@ -1,3 +1,2 @@
-
-export const tokenKey = "@App:token"
-export const userKey = "@App:use"
+export const tokenKey = "@App:token";
+export const userKey = "@App:use";

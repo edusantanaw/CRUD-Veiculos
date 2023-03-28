@@ -1,13 +1,13 @@
 import { Box } from "@mui/material";
-import CarForm from "../../../shared/components/form/CarForm";
+import SupplyForm from "../../../shared/components/form/SupplyForm";
 import ModalComponent from "../../../shared/components/modal/ModalComponent";
 import { usePostOrPut } from "../../../shared/hooks/usePostOrPutt";
-import { ICar } from "../../../shared/types/car";
+import { ISupply } from "../../../shared/types/supply";
 
 interface props {
   open: boolean;
-  handleModal: (data: ICar) => void;
-  car: ICar;
+  handleModal: (data: ISupply) => void;
+  supply: ISupply;
 }
 
 const boxStyles = {
@@ -16,25 +16,25 @@ const boxStyles = {
   borderRadius: "10px",
 };
 
-const EditCar = ({ handleModal, car, open }: props) => {
-  const put = usePostOrPut<ICar>({ method: "put" });
+const EditSupply = ({ handleModal, supply, open }: props) => {
+  const put = usePostOrPut<ISupply>({ method: "put" });
 
   async function handleUpdate(data: any) {
-    const response = await put({ url: `/car/${car.id}`, data });
+    const response = await put({ url: `/supply/${supply.id}`, data });
     return response;
   }
 
   return (
     <ModalComponent handleModal={handleModal} open={open}>
       <Box sx={boxStyles}>
-        <CarForm
-          handleClose={() => handleModal(car)}
+        <SupplyForm
+          handleClose={() => handleModal(supply)}
           handleCreate={handleUpdate}
-          car={car}
+          supply={supply}
         />
       </Box>
     </ModalComponent>
   );
 };
 
-export default EditCar;
+export default EditSupply;

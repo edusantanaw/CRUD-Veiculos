@@ -1,6 +1,6 @@
 import { createContext, useState, useLayoutEffect, useEffect } from "react";
 import { userKey, tokenKey } from "../constants/keys";
-import { signinService, signupService } from "../../services/auth";
+import { authService } from "../../services/auth";
 import { authData, IAuthContext } from "../types/auth";
 import { IUser } from "../types/user";
 
@@ -56,24 +56,10 @@ export const AuthProvider = ({ children }: props) => {
     sessionStorage.setItem(tokenKey, data.token);
   }
 
-  async function signin(data: authData) {
+  async function handleAuth(data: authData, url: string) {
     try {
       const { remember, ...rest } = data;
-      const response = await signinService(rest);
-      setUser(() => response.user);
-      setToken(() => response.token);
-      makeStorage({ ...response, remember });
-      setAuth(true);
-      clearError();
-    } catch (error) {
-      setError(error as string);
-    }
-  }
-
-  async function signup(data: authData) {
-    try {
-      const { remember, ...rest } = data;
-      const response = await signupService(rest);
+      const response = await authService(rest, url);
       setUser(() => response.user);
       setToken(() => response.token);
       makeStorage({ ...response, remember });
@@ -90,7 +76,7 @@ export const AuthProvider = ({ children }: props) => {
 
   return (
     <AuthContext.Provider
-      value={{ auth, error, signin, signup, token, user, clearError }}
+      value={{ auth, error, handleAuth, token, user, clearError }}
     >
       {children}
     </AuthContext.Provider>

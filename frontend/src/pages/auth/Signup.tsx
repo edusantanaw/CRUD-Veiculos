@@ -6,13 +6,13 @@ import Form from "./components/Form";
 import { useAuth } from "../../shared/hooks/useAuth";
 
 const Signup = () => {
-  const { signup } = useAuth();
+  const { handleAuth } = useAuth();
 
   return (
     <Container>
       <AccountCircleIcon color="secondary" />
       <h2>Sign up</h2>
-      <Form service={signup} />
+      <Form url="/signup" service={handleAuth} />
 
       <Link to="/signin">Já tem uma conta?</Link>
     </Container>

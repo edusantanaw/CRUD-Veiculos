@@ -15,17 +15,18 @@ interface props {
   handleEdit: (car: ICar | null) => void;
   handleRemove: (car: ICar | null) => void;
   id?: string;
+  modal: boolean;
 }
 
-export function Car({ handleEdit, handleRemove }: props) {
+export function Car({ handleEdit, handleRemove, modal }: props) {
   const [newItem, setNewItem] = useState<ICar | null>(null);
+
+  const post = usePostOrPut<ICar>({ method: "post" });
 
   const { data, error, loading } = useFetching<ICar>({
     url: "/car",
-    dependeces: [newItem],
+    dependeces: [newItem, modal],
   });
-
-  const post = usePostOrPut<ICar>({ method: "post" });
 
   const carColumn = [
     ...carColumns,

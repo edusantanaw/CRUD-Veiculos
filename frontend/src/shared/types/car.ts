@@ -8,3 +8,12 @@ export type ICar = {
   renavam: string;
 };
 
+
+export type dataCreate = {
+  model: string;
+  color: string;
+  licensePlate: string;
+  power: number;
+  brand: string;
+  renavam: string;
+};

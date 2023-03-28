@@ -13,10 +13,11 @@ import { authData } from "../../../shared/types/auth";
 import { FormContainer } from "../styles";
 
 interface props {
-  service: (data: authData) => Promise<void>;
+  service: (data: authData, url: string) => Promise<void>;
+  url: string;
 }
 
-function Form({ service }: props) {
+function Form({ service, url }: props) {
   const cpfRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
   const rememberRef = useRef<HTMLInputElement | null>(null);
@@ -33,7 +34,7 @@ function Form({ service }: props) {
     const remember = rememberRef.current!.checked;
     const cpf = cpfRef.current!.value;
     const password = passwordRef.current!.value;
-    await service({ password, cpf, remember });
+    await service({ password, cpf, remember }, url);
   }
 
   return (

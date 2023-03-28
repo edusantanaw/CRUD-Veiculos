@@ -55,21 +55,21 @@ export const carColumns: GridColDef[] = [
   {
     field: "model",
     headerName: "Modelo",
-    width: 100,
+    width: 130,
     align: "center",
     headerAlign: "center",
   },
   {
     field: "power",
     headerName: "Potência",
-    width: 100,
+    width: 130,
     align: "center",
     headerAlign: "center",
   },
   {
     field: "brand",
     headerName: "Marca",
-    width: 100,
+    width: 130,
     align: "center",
     headerAlign: "center",
   },
@@ -86,15 +86,7 @@ export const carColumns: GridColDef[] = [
     width: 130,
     align: "center",
     headerAlign: "center",
-  },
-  {
-    field: "supply",
-    headerName: "Reabastecer",
-    width: 110,
-    align: "center",
-    headerAlign: "center",
-  },
-  
+  }
 ];
 
 type Action<T, R> = (data: T) => R;

@@ -26,7 +26,6 @@ function CarForm<T>({ handleClose, handleCreate, car }: props<T>) {
   };
 
   async function handleSubmit(data: T) {
-    console.log(data);
     const { loading, error } = await handleCreate(data);
     if (!error) {
       handleClose();

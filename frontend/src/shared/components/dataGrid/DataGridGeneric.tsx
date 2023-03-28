@@ -6,7 +6,7 @@ interface props<T, R> {
   rows: R[];
 }
 
-function Grid<T, R>({ column, rows }: props<T, R>) {
+function Grid<T, R>({ column = [], rows }: props<T, R>) {
   const [list, setList] = useState<R[]>([]);
 
   useEffect(() => {

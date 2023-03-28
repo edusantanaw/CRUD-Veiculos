@@ -7,7 +7,7 @@ type authResponse = {
   token: string;
 };
 
-export const signinService = async (data: data) => {
+export const authService = async (data: data, url: string) => {
   try {
     const response = await Api.post<authResponse>("/signin", data);
     return response.data;
@@ -17,12 +17,3 @@ export const signinService = async (data: data) => {
   }
 };
 
-export const signupService = async (data: data) => {
-  try {
-    const response = await Api.post<authResponse>("/signup", data);
-    return response.data;
-  } catch (error) {
-    const message = error as { response: { data: string } };
-    throw message.response.data;
-  }
-};

@@ -9,7 +9,7 @@ import { verifyAuth } from "../middlewares/verifyAuth";
 
 export default (router: Router) => {
   router.post("/car", verifyAuth, adapter(makeCreateCarController()));
-  router.put("/car", verifyAuth, adapter(makeUpdateCarController()));
+  router.put("/car/:id", verifyAuth, adapter(makeUpdateCarController()));
   router.get("/car", verifyAuth, adapter(makeLoadAllCarsController()));
   router.get("/car/:id", verifyAuth, adapter(makeLoadCarByIdController()));
   router.delete("/car/:id", verifyAuth, adapter(makeDeleteCarController()));
