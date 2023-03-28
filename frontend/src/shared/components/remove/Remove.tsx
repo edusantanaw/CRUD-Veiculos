@@ -1,21 +1,25 @@
 import React, { useState } from "react";
 import { Modal, Box, Typography, Button } from "@mui/material";
 import { AxiosError } from "axios";
-import { ICar } from "../../../shared/types/car";
-import { deleteCar } from "../../../services/car";
+import { ICar } from "../../types/car";
 
-interface props {
-  handleModal: (car: ICar) => void;
+type byId = {
+  id: string;
+};
+
+interface props<T, R> {
+  handleModal: (item: T) => void;
   open: boolean;
-  car: ICar;
+  service: (id: string) => Promise<R>;
+  item: T;
 }
 
-const RemoveCar = ({ open, car, handleModal }: props) => {
+function Remove<T extends byId, R>({ open, service, handleModal, item }: props<T, R>) {
   const [error, setError] = useState<string | null>(null);
 
   async function handleDelete() {
     try {
-      await deleteCar(car.id);
+      await service(item.id);
     } catch (error) {
       const message = error as AxiosError<string>;
       setError(() => message.response!.data);
@@ -62,7 +66,7 @@ const RemoveCar = ({ open, car, handleModal }: props) => {
             sx={{ width: "48%", height: "3.1em" }}
             variant="contained"
             color="error"
-            onClick={() => handleModal(car)}
+            onClick={() => handleModal(item)}
           >
             Nao
           </Button>
@@ -71,6 +75,6 @@ const RemoveCar = ({ open, car, handleModal }: props) => {
       </Box>
     </Modal>
   );
-};
+}
 
-export default RemoveCar;
+export default Remove;

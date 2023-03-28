@@ -2,8 +2,9 @@ import { useState } from "react";
 import EditCar from "./components/EditCar";
 import { ICar } from "../../shared/types/car";
 import { Container } from "../../styles/Global";
-import RemoveCar from "./components/RemoveCar";
+import RemoveCar from "../../shared/components/remove/Remove";
 import { Car } from "./components";
+import { deleteCar } from "../../services/car";
 
 const Cars = () => {
   const [editCar, setEditCar] = useState(false);
@@ -24,8 +25,9 @@ const Cars = () => {
     <Container>
       <EditCar handleModal={handleCarEdit} open={editCar} car={car!} />
       <RemoveCar
+        service={deleteCar}
         open={removeCar}
-        car={car!}
+        item={car!}
         handleModal={handleRemoveCarModal}
       />
       <Car handleEdit={handleCarEdit} handleRemove={handleRemoveCarModal} />
