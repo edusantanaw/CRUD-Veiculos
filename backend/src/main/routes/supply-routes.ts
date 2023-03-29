@@ -4,6 +4,7 @@ import { makeCreateSupplyController } from "../factory/controller/createSupply";
 import { makeDeleteSupplyController } from "../factory/controller/deleteSupply";
 import { makeLoadAllSupplyController } from "../factory/controller/loadAllSupply";
 import { makeLoadSupplyByIdController } from "../factory/controller/loadSupplyById";
+import { makeUpdateSupplyController } from "../factory/controller/updateSupply";
 import { verifyAuth } from "../middlewares/verifyAuth";
 
 export default (router: Router) => {
@@ -19,4 +20,5 @@ export default (router: Router) => {
     verifyAuth,
     adapter(makeDeleteSupplyController())
   );
+  router.put("/supply/:id", adapter(makeUpdateSupplyController()));
 };

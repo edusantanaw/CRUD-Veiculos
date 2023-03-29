@@ -1,5 +1,5 @@
-import { DeleteUsecaseSpy } from "../../../test/mocks/usecases/delete";
-import { DeleteController } from "./delete";
+import { DeleteUsecaseSpy } from "../mocks/usecases/delete";
+import { DeleteController } from "../../src/presentational/controllers/delete";
 
 function makeSut() {
   const deleteUsecase = new DeleteUsecaseSpy();

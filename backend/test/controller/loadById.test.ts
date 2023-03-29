@@ -1,5 +1,5 @@
-import { LoadByIdUsecaseSpy } from "../../../test/mocks/usecases/loadById";
-import { LoadByIdController } from "./loadById";
+import { LoadByIdUsecaseSpy } from "../mocks/usecases/loadById";
+import { LoadByIdController } from "../../src/presentational/controllers/loadById";
 
 function makeSut() {
   const loadByIdUsecase = new LoadByIdUsecaseSpy();

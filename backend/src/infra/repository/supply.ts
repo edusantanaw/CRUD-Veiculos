@@ -23,6 +23,14 @@ export class SupplyRepository {
     });
   }
 
+  public async update(data: ISuplly){
+    const updated = await supply.update({
+      where: {id: data.id},
+      data: data
+    })
+    return updated as ISuplly
+  }
+
   public async loadByCarId(carId: string) {
     const data = await supply.findMany({ where: { carId, deleted: false } });
     return data;

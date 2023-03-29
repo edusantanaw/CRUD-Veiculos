@@ -1,7 +1,7 @@
-import { makeCarHelper } from "../../../test/helpers/makeCar";
-import { CarRepositorySpy } from "../../../test/mocks/repository/car";
-import { Car } from "../../domain/entities/car";
-import { CreateCarUsecase } from "./createCar";
+import { makeCarHelper } from "../helpers/makeCar";
+import { CarRepositorySpy } from "../mocks/repository/car";
+import { Car } from "../../src/domain/entities/car";
+import { CreateCarUsecase } from "../../src/data/usecases/createCar";
 
 function makeSut() {
   const carRepository = new CarRepositorySpy();

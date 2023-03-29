@@ -1,9 +1,9 @@
-import { makeCarHelper } from "../../../test/helpers/makeCar";
-import { SchemaValidatorSpy } from "../../../test/mocks/helpers/schemaValidator";
-import { CreateCarUsecaseSpy } from "../../../test/mocks/usecases/createCar";
-import { carParams } from "../../data/protocols/repository/createCar";
-import { ICar } from "../../types/car";
-import { CreateController } from "./create";
+import { makeCarHelper } from "../helpers/makeCar";
+import { SchemaValidatorSpy } from "../mocks/helpers/schemaValidator";
+import { CreateCarUsecaseSpy } from "../mocks/usecases/createCar";
+import { carParams } from "../../src/data/protocols/repository/createCar";
+import { ICar } from "../../src/types/car";
+import { CreateController } from "../../src/presentational/controllers/create";
 
 type data = {
    model: string;

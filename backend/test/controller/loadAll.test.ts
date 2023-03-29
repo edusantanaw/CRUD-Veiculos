@@ -1,5 +1,5 @@
-import { LoadAllUsecaseSpy } from "../../../test/mocks/usecases/loadAll";
-import { LoadAllController } from "./loadAll";
+import { LoadAllUsecaseSpy } from "../mocks/usecases/loadAll";
+import { LoadAllController } from "../../src/presentational/controllers/loadAll";
 
 function makeSut() {
   const loadAllUsecase = new LoadAllUsecaseSpy();

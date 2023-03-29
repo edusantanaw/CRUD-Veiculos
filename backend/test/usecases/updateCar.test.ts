@@ -1,6 +1,6 @@
-import { makeCarHelper } from "../../../test/helpers/makeCar";
-import { CarRepositorySpy } from "../../../test/mocks/repository/car";
-import { UpdateCarUsecase } from "./updateCar";
+import { makeCarHelper } from "../helpers/makeCar";
+import { CarRepositorySpy } from "../mocks/repository/car";
+import { UpdateCarUsecase } from "../../src/data/usecases/updateCar";
 
 function makeSut() {
   const repository = new CarRepositorySpy();

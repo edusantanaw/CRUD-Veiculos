@@ -1,5 +1,5 @@
-import { RepositorySpy } from "../../../test/mocks/repository/repositoy";
-import { DeleteUsecase } from "./delete";
+import { RepositorySpy } from "../mocks/repository/repositoy";
+import { DeleteUsecase } from "../../src/data/usecases/delete";
 
 function makeSut() {
   const repository = new RepositorySpy();

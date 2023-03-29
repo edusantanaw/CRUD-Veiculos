@@ -42,7 +42,7 @@ function CarForm<T>({ handleClose, handleCreate, car }: props<T>) {
     <Form onSubmit={formik.handleSubmit}>
       <div className="inputs">
         <TextField
-          id="filled-basic"
+          id="filled-model"
           label="Modelo"
           name="model"
           variant="filled"
@@ -54,7 +54,7 @@ function CarForm<T>({ handleClose, handleCreate, car }: props<T>) {
           sx={{ width: "28em" }}
         />
         <TextField
-          id="filled-basic"
+          id="filled-color"
           value={formik.values.color}
           label="Cor"
           name="color"
@@ -66,7 +66,7 @@ function CarForm<T>({ handleClose, handleCreate, car }: props<T>) {
           sx={{ width: "28em" }}
         />
         <TextField
-          id="filled-basic"
+          id="filled-plate"
           value={formik.values.licensePlate}
           label="Placa"
           name="licensePlate"
@@ -80,7 +80,7 @@ function CarForm<T>({ handleClose, handleCreate, car }: props<T>) {
           sx={{ width: "28em" }}
         />
         <TextField
-          id="filled-basic"
+          id="filled-power"
           value={formik.values.power}
           label="Potencia"
           name="power"
@@ -93,7 +93,7 @@ function CarForm<T>({ handleClose, handleCreate, car }: props<T>) {
           sx={{ width: "28em" }}
         />
         <TextField
-          id="filled-basic"
+          id="filled-brand"
           value={formik.values.brand}
           label="Marca"
           name="brand"
@@ -105,7 +105,7 @@ function CarForm<T>({ handleClose, handleCreate, car }: props<T>) {
           sx={{ width: "28em" }}
         />
         <TextField
-          id="filled-basic"
+          id="filled-renavam"
           value={formik.values.renavam}
           label="Renavam"
           name="renavam"
@@ -118,7 +118,6 @@ function CarForm<T>({ handleClose, handleCreate, car }: props<T>) {
         />
         {messageError && <span>{messageError}</span>}
       </div>
-      
       <input type="submit" />
     </Form>
   );

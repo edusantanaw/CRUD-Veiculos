@@ -1,8 +1,8 @@
-import { CompareSpy } from "../../../test/mocks/helpers/encrypter";
-import { JwtTokenSpy } from "../../../test/mocks/helpers/jwtToken";
-import { UserRepositorySpy } from "../../../test/mocks/repository/user";
-import { User } from "../../domain/entities/user";
-import { AuthUsecase } from "./auth";
+import { CompareSpy } from "../mocks/helpers/encrypter";
+import { JwtTokenSpy } from "../mocks/helpers/jwtToken";
+import { UserRepositorySpy } from "../mocks/repository/user";
+import { User } from "../../src/domain/entities/user";
+import { AuthUsecase } from "../../src/data/usecases/auth";
 
 function makeSut() {
   const userRepository = new UserRepositorySpy();

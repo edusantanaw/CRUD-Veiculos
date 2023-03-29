@@ -1,5 +1,5 @@
-import { RepositorySpy } from "../../../test/mocks/repository/repositoy";
-import { LoadByIdUsecase } from "./loadById";
+import { RepositorySpy } from "../mocks/repository/repositoy";
+import { LoadByIdUsecase } from "../../src/data/usecases/loadById";
 
 function makeSut() {
   const repository = new RepositorySpy();

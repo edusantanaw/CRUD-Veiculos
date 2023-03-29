@@ -1,6 +1,6 @@
-import { CpfValidatorSpy } from "../../../test/mocks/helpers/cpfValidator";
-import { CreateUserUsecaseSpy } from "../../../test/mocks/usecases/createUser";
-import { CreateUserController } from "./createUser";
+import { CpfValidatorSpy } from "../mocks/helpers/cpfValidator";
+import { CreateUserUsecaseSpy } from "../mocks/usecases/createUser";
+import { CreateUserController } from "../../src/presentational/controllers/createUser";
 
 function makeSut() {
   const cpfValidator = new CpfValidatorSpy();

@@ -1,32 +1,25 @@
-import { carParams } from "../../data/protocols/repository/createCar";
-import { ICreateUsecase } from "../../domain/usecases/create";
 import { IUpdateUsecase } from "../../domain/usecases/update";
-import { ICar } from "../../types/car";
 import {
-  badRequest,
-  created,
-  error,
+  badRequest, error,
   httpResponse,
-  success,
+  success
 } from "../helpers/http-response";
 import { IController } from "../presentational/controller";
 import { ISchemaValidator } from "../presentational/helpers/validator";
 
-export interface updateParams extends carParams {
-  id: string;
-}
 
-export class UpdateCarController implements IController {
+
+export class UpdateController<T, P> implements IController {
   constructor(
-    private readonly schemaValidator: ISchemaValidator<updateParams>,
-    private readonly updateCarUsecase: IUpdateUsecase<updateParams, ICar>
+    private readonly schemaValidator: ISchemaValidator<P>,
+    private readonly updateUsecase: IUpdateUsecase<P, T>
   ) {}
-  public async handle(data: updateParams): Promise<httpResponse> {
+  public async handle(data: P): Promise<httpResponse> {
     try {
       const response = this.schemaValidator.isValid(data);
       if (!!response) return badRequest(response.message);
-      const car = await this.updateCarUsecase.update({ ...data });
-      return success(car);
+      const updated = await this.updateUsecase.update({ ...data });
+      return success(updated);
     } catch (err) {
       return error(err as Error);
     }

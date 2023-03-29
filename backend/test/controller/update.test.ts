@@ -1,12 +1,23 @@
-import { makeCarHelper } from "../../../test/helpers/makeCar";
-import { SchemaValidatorSpy } from "../../../test/mocks/helpers/schemaValidator";
-import { UpdateCarUsecaseSpy } from "../../../test/mocks/usecases/updateCar";
-import { UpdateCarController, updateParams } from "./update";
+import { makeCarHelper } from "../helpers/makeCar";
+import { SchemaValidatorSpy } from "../mocks/helpers/schemaValidator";
+import { UpdateCarUsecaseSpy } from "../mocks/usecases/updateCar";
+import { ICar } from "../../src/types/car";
+import { UpdateController } from "../../src/presentational/controllers/update";
+
+type updateCar = {
+  id: string;
+  model: string;
+  licensePlate: string;
+  color: string;
+  power: number;
+  brand: string;
+  renavam: string;
+};
 
 function makeSut() {
   const schemaValidator = new SchemaValidatorSpy();
   const updateCarUsecase = new UpdateCarUsecaseSpy();
-  const udaptedCarControlelr = new UpdateCarController(
+  const udaptedCarControlelr = new UpdateController<ICar, updateCar>(
     schemaValidator,
     updateCarUsecase
   );
@@ -23,7 +34,7 @@ describe("CreateCarController", () => {
   test("Should return a badRequest if any field is invalid", async () => {
     const { udaptedCarControlelr, schemaValidator } = makeSut();
     schemaValidator.valid = false;
-    const response = await udaptedCarControlelr.handle({} as updateParams);
+    const response = await udaptedCarControlelr.handle({} as ICar);
     expect(response.statusCode).toBe(400);
     expect(response.body).toBe("Error");
   });

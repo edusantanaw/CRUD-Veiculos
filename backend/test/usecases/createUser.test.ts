@@ -1,7 +1,7 @@
-import { Encoder } from "../../../test/mocks/helpers/encrypter";
-import { JwtTokenSpy } from "../../../test/mocks/helpers/jwtToken";
-import { UserRepositorySpy } from "../../../test/mocks/repository/user";
-import { CreateUserUsecase } from "./createUser";
+import { Encoder } from "../mocks/helpers/encrypter";
+import { JwtTokenSpy } from "../mocks/helpers/jwtToken";
+import { UserRepositorySpy } from "../mocks/repository/user";
+import { CreateUserUsecase } from "../../src/data/usecases/createUser";
 
 function makeSut() {
   const userRepository = new UserRepositorySpy();

@@ -97,7 +97,7 @@ function SupplyForm({ handleClose, handleCreate, supply }: props) {
           sx={{ width: "28em" }}
         />
         <TextField
-          id="filled-basic"
+          id="filled-quantity"
           value={formik.values.quantitySupplied}
           label="Quantidade"
           name="quantitySupplied"

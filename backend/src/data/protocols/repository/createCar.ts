@@ -6,6 +6,7 @@ export interface ICreateCarRepository {
   }
   
   export type carParams = {
+    
     model: string;
     licensePlate: string;
     color: string;

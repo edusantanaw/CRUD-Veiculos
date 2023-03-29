@@ -1,8 +1,8 @@
-import { makeCarHelper } from "../../../test/helpers/makeCar";
-import { CarRepositorySpy } from "../../../test/mocks/repository/car";
-import { RepositorySpy } from "../../../test/mocks/repository/repositoy";
-import { ISuplly } from "../../types/supply";
-import { CreateSupplyUsecase } from "./createSupply";
+import { makeCarHelper } from "../helpers/makeCar";
+import { CarRepositorySpy } from "../mocks/repository/car";
+import { RepositorySpy } from "../mocks/repository/repositoy";
+import { ISuplly } from "../../src/types/supply";
+import { CreateSupplyUsecase } from "../../src/data/usecases/createSupply";
 
 function makeSut() {
   const carRepository = new CarRepositorySpy();
